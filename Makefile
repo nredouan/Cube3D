@@ -5,16 +5,16 @@ RM			= rm -f
 
 OBJ_DIR		= obj
 
-SRCS 		= src/jeu/exec.c
+SRCS 		= window_test.c
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-MLX_DIR		= includes/MacroLibX
+MLX_DIR		= MacroLibX
 MLX_REPO    = https://github.com/seekrs/MacroLibX.git
 MLX_VERSION = ddfbe32
 
-LIBFT_DIR	= includes/libft
-LIBMLX		= includes/MacroLibX
+LIBFT_DIR	= libft
+LIBMLX		= MacroLibX
 LIBFT		= $(LIBFT_DIR)/libft.a
 MLX_SO		= $(MLX_DIR)/libmlx.so -lSDL2
 INCLUDES	= -I includes -I src -I $(LIBFT_DIR)
