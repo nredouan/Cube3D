@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   window_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/06 13:03:14 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/06 14:06:09 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "cube3d.h"
+#include "../../cube3d.h"
 
 void	window_hook(int event, void *param)
 {
