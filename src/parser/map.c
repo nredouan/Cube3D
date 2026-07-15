@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/07 15:53:04 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/15 14:04:53 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,26 @@ char	**create_map(t_map *maps)
 	return (real_map);
 }
 
-char	**get_map(int fd)
+int	line_is_good(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+t_map	*make_map(int fd, t_map *new, t_map *maps)
 {
 	char	*str;
-	t_map	*maps;
-	t_map	*new;
-	char	**real_map;
 
-	maps = NULL;
-	new = NULL;
 	str = get_next_line(fd);
-	if (!strncmp(str, "\n", 1))
+	while (line_is_good(str))
 	{
 		free(str);
 		str = get_next_line(fd);
@@ -66,6 +75,18 @@ char	**get_map(int fd)
 		}
 		str = get_next_line(fd);
 	}
+	return (maps);
+}
+
+char	**get_map(int fd)
+{
+	t_map	*maps;
+	t_map	*new;
+	char	**real_map;
+
+	maps = NULL;
+	new = NULL;
+	maps = make_map(fd, new, maps);
 	real_map = create_map(maps);
 	free_tmap(&maps);
 	if (!real_map)

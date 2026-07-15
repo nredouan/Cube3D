@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:10:07 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/07 16:11:15 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/15 14:56:34 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,33 @@ int	until_space(char *str)
 	return (i);
 }
 
+void	finish_gnl(int fd)
+{
+	char	*str;
+
+	str = get_next_line(fd);
+	while (str)
+	{
+		free(str);
+		str = get_next_line(fd);
+	}
+	free(str);
+}
+
+int	identifier_good(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int map_valid(t_data **data, int fd)
 {
 	char	*str;
@@ -50,28 +77,36 @@ int map_valid(t_data **data, int fd)
 	const t_set_id	list_id[] = {{"NO", no}, {"SO", so}, {"WE", we},
 	{"EA", ea}, {"F", f}, {"C", c}, {NULL, NULL}};
 	int		i;
+	int		j;
 
 	str = get_next_line(fd);
 	if (!str)
 	{
 		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Map is empty.", 2);
+		ft_putendl_fd("The file is empty.", 2);
 		return (1);
 	}
 	while (str)
 	{
 		i = 0;
-		while (str && str[0] == '\n')
+		while (identifier_good(str))
 		{
 			free(str);
 			str = get_next_line(fd);
 		}
+		j = 0;
+		while (str[j] == ' ')
+			j++;
 		while (list_id[i].type)
 		{
-			if (!ft_strncmp(str, list_id[i].type, ft_strlen(list_id[i].type)))
+			if (!ft_strncmp(&str[j], list_id[i].type, ft_strlen(list_id[i].type)))
 			{
 				if (list_id[i].f(data, &str[until_space(str)]))
+				{
+					free(str);
+					finish_gnl(fd);
 					return (1);
+				}
 				nb++;
 				break ;
 			}
@@ -79,6 +114,8 @@ int map_valid(t_data **data, int fd)
 		}
 		if (!list_id[i].type)
 		{
+			free(str);
+			finish_gnl(fd);
 			ft_putendl_fd("Error", 2);
 			ft_putendl_fd("Wrong identifier in map.", 2);
 			return (1);
@@ -88,7 +125,10 @@ int map_valid(t_data **data, int fd)
 			(*data)->map = get_map(fd);
 			free(str);
 			if (!(*data)->map)
-					return (1);
+			{
+				finish_gnl(fd);
+				return (1);
+			}
 			break ;
 		}
 		free(str);
@@ -103,7 +143,8 @@ void	free_data(t_data **data)
 	free((*data)->ea);
 	free((*data)->no);
 	free((*data)->we);
-	free_memory((*data)->map);
+	if ((*data)->map)
+		free_memory((*data)->map);
 	free(*data);
 	
 }
@@ -129,13 +170,13 @@ void	print_data(t_data *data)
 
 	while (i < 3)
 	{
-		printf("C == %d\n", data->c[i]);
+		printf("F == %d\n", data->f[i]);
 		i++;
 	}
 	i = 0;
 	while (i < 3)
 	{
-		printf("F == %d\n", data->f[i]);
+		printf("C == %d\n", data->c[i]);
 		i++;
 	}
 	printf("\nEA == %s\n", data->ea);
@@ -172,7 +213,12 @@ int main(int ac, char **av)
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (1);
-	map_valid(&data, fd);
+	data->map = NULL;
+	if (map_valid(&data, fd))
+	{
+		free_data(&data);
+		return (1);
+	}
 	parser(&data);
 	print_data(data);
 	free_data(&data);

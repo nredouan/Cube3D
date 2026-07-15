@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/07 16:57:38 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/14 13:48:10 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	f(t_data **data, char *info)
 	{
 		nb = ft_atoi(rgb[i]);
 		if (nb >= 0 && nb <= 255)
-			(*data)->c[i] = nb;
+			(*data)->f[i] = nb;
 		else
 		{
 			ft_putendl_fd("Error", 2);
