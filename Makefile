@@ -1,6 +1,6 @@
 NAME		= cube3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -lm
 RM			= rm -f
 
 OBJ_DIR		= obj
