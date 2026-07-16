@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:33:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/12 11:04:20 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/16 11:11:07 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,71 @@ typedef struct	s_game
 	mlx_window				window;
 	t_player				player;
 }		t_game;
+
+typedef struct s_data
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		f[3];
+	int		c[3];
+	char	**map;
+}				t_data;
+
+typedef struct s_mlx
+{
+	void	*addr;
+	void	*win;
+	void	*wall_no;
+}				t_mlx;
+
+typedef struct s_map
+{
+	char			*map;
+	struct s_map	*next;
+}				t_map;
+
+typedef struct s_set_id
+{
+	char	*type;
+	int		(*f)(t_data **data, char *info);
+}	t_set_id;
+
+//Simon parser
+// set_id
+int		no(t_data **data, char *info);
+int		so(t_data **data, char *info);
+int		we(t_data **data, char *info);
+int		ea(t_data **data, char *info);
+int		f(t_data **data, char *info);
+int		c(t_data **data, char *info);
+
+// parser
+void	is_map_is_error(t_data **data, int x, int y);
+void	map_is_error(t_data **data);
+int		parser(t_data **data);
+char	**get_map(int fd);
+
+// t_map
+void	ft_lstadd_back_map(t_map **lst, t_map *new);
+t_map	*ft_lstnew_file(char *str);
+int		ft_tmapsize(t_map *lst);
+void	free_tmap(t_map **map);
+
+// utils
+void	free_data(t_data **data);
+int		until_space(char *str);
+void	free_memory(char **s);
+void	finish_gnl(int fd);
+void	is_cub(char *str);
+
+//fill data
+int		get_textures(char *str, int fd, t_data **data);
+int		error_in_info(char *str, int fd, int i);
+int		send_info(const t_set_id *list,
+			int fd, char *str, t_data **data);
+int		map_valid(t_data **data, int fd);
+int		identifier_good(char *str);
 
 #endif

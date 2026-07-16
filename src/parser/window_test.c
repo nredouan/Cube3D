@@ -6,12 +6,12 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/12 11:11:28 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/16 11:12:10 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "cube3d.h"
+#include "../../cube3d.h"
 
 void	window_hook(int event, void *param)
 {

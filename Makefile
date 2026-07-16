@@ -1,11 +1,21 @@
 NAME		= cube3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -lm
+CFLAGS		= -Wall -Wextra -Werror -lm -g
 RM			= rm -f
 
 OBJ_DIR		= obj
 
-SRCS 		= window_test.c
+VPATH		= src:src/parser
+
+SRCS 		= main.c \
+				map.c \
+				set_id.c \
+				t_map.c \
+				parser.c \
+				set_fandc.c \
+				get_data.c \
+				parser_utils.c \
+				utils.c \
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
