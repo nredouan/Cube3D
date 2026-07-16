@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/16 13:44:14 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 14:47:29 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ void	key_hook(int key, void *param)
 
 void	game_destroy(t_game *game)
 {
+	mlx_destroy_image(game->mlx, game->ea);
+	mlx_destroy_image(game->mlx, game->no);
+	mlx_destroy_image(game->mlx, game->so);
+	mlx_destroy_image(game->mlx, game->we);
 	if (game->window)
 		mlx_destroy_window(game->mlx, game->window);
 	if (game->mlx)
@@ -63,10 +67,6 @@ void	game_destroy(t_game *game)
 	if (game->win_infos)
 		free(game->win_infos);
 	free_memory(game->map);
-	free(game->ea); // destroy image
-	free(game->no);
-	free(game->so);
-	free(game->we);
 	free(game);
 }
 
@@ -76,16 +76,17 @@ t_game	*init_game(int fd)
 
 	game = ft_calloc(sizeof(t_game), 1);
 		//protect malloc
+
+	game->win_infos = ft_calloc(sizeof(mlx_window_create_info), 1);
+		// protect calloc
+	game->mlx = mlx_init();
+		//protect mlx_init
 	if (map_valid(&game, fd))
 	{
 		game_destroy(game);
 		return (NULL);
 	}
 	parser(&game);
-	game->win_infos = ft_calloc(sizeof(mlx_window_create_info), 1);
-		// protect calloc
-	game->mlx = mlx_init();
-		//protect mlx_init
 	game->win_infos->title = "cube3D";
 	game->win_infos->width = 1024;
 	game->win_infos->height = 512;

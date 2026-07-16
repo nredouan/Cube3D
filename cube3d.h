@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:33:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/16 13:42:37 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 13:57:04 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ typedef struct	s_game
 	mlx_window				window;
 	t_player				player;
 	char					**map;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		f[3];
-	int		c[3];
-	int		py;
-	int		px;
-	char		angle;
+	void					*no;
+	void					*so;
+	void					*we;
+	void					*ea;
+	int						f[3];
+	int						c[3];
+	int						py;
+	int						px;
+	char					angle;
 }		t_game;
 
 typedef struct s_mlx

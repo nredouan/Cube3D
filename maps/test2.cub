@@ -1,6 +1,6 @@
-NO    .          /path_to_the            _north_texture
-SO    ./path_to_the_south_texture
-WE    ./path_to_the_west_texture                       
+NO    textures/1X4A4218-Modifier1.jpg
+SO    textures/1761144486772.jpg
+WE    textures/Image_1758056007561.jpg
 
 
 
@@ -8,12 +8,12 @@ WE    ./path_to_the_west_texture
 
 
 
-EA    ./path_to_the_east_texture
+EA    textures/cat.jpg
 
 F 220 ,            100,         0
 C 225 ,                    30              , 0
 
 1111
 1001
-1E01
+1N01
 111
