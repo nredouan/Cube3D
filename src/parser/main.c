@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:10:07 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/16 11:05:40 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 11:07:56 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,6 @@ int	main(int ac, char **av)
 	}
 	parser(&data);
 	// print_data(data);
-	mlx = ft_calloc(sizeof(t_mlx), 1);
-	if (!mlx)
-		return (1);
-	mlx->addr = mlx_init();
-	mlx_window_create_info *win;
-	win = ft_calloc(sizeof(mlx_window_create_info), 1);
-	if (!win)
-		return (1);
-	win->height = 500;
-	win->width = 500;
-	int	ds[1];
-	ds[0] = 64;
-	win->title = "caca";
-	mlx->wall_no = mlx_new_image_from_file(mlx->addr, data->no, ds, ds);
-	mlx->win = mlx_new_window(mlx->addr, win);
-	mlx_put_image_to_window(mlx->addr, mlx->win, mlx->wall_no, 0, 0);
-	mlx_loop(mlx->addr);
 	free_data(&data);
 	return (0);
 }
