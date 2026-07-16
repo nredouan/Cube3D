@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/15 16:07:00 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 12:32:45 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	invalid_info(void)
 	ft_putendl_fd("Invalid information.", 2);
 }
 
-int	f(t_data **data, char *info)
+int	f(t_game **game, char *info)
 {
 	char	**rgb;
 	int		i;
@@ -64,7 +64,7 @@ int	f(t_data **data, char *info)
 	{
 		nb = ft_atoi(rgb[i]);
 		if (nb >= 0 && nb <= 255)
-			(*data)->f[i] = nb;
+			(*game)->f[i] = nb;
 		else
 		{
 			invalid_info();
@@ -77,7 +77,7 @@ int	f(t_data **data, char *info)
 	return (0);
 }
 
-int	c(t_data **data, char *info)
+int	c(t_game **game, char *info)
 {
 	char	**rgb;
 	int		i;
@@ -93,7 +93,7 @@ int	c(t_data **data, char *info)
 	{
 		nb = ft_atoi(rgb[i]);
 		if (nb >= 0 && nb <= 255)
-			(*data)->c[i] = nb;
+			(*game)->c[i] = nb;
 		else
 		{
 			invalid_info();

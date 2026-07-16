@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:44:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/15 16:45:04 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 12:14:36 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	error_in_info(char *str, int fd, int i)
 	return (1);
 }
 
-int	send_info(const t_set_id *list, int fd, char *str, t_data **data)
+int	send_info(const t_set_id *list, int fd, char *str, t_game **game)
 {
 	int				j;
 	int				i;
@@ -51,7 +51,7 @@ int	send_info(const t_set_id *list, int fd, char *str, t_data **data)
 	{
 		if (!ft_strncmp(&str[j], list[i].type, ft_strlen(list[i].type)))
 		{
-			if (list[i].f(data, &str[until_space(str)]))
+			if (list[i].f(game, &str[until_space(str)]))
 				return (error_in_info(str, fd, 0));
 			break ;
 		}
@@ -62,7 +62,7 @@ int	send_info(const t_set_id *list, int fd, char *str, t_data **data)
 	return (0);
 }
 
-int	get_textures(char *str, int fd, t_data **data)
+int	get_textures(char *str, int fd, t_game **game)
 {
 	int				nb;
 	const t_set_id	list[] = {{"NO", no}, {"SO", so}, {"WE", we},
@@ -76,7 +76,7 @@ int	get_textures(char *str, int fd, t_data **data)
 			free(str);
 			str = get_next_line(fd);
 		}
-		if (send_info(list, fd, str, data))
+		if (send_info(list, fd, str, game))
 			return (1);
 		free(str);
 		str = get_next_line(fd);
@@ -86,7 +86,7 @@ int	get_textures(char *str, int fd, t_data **data)
 	return (0);
 }
 
-int	map_valid(t_data **data, int fd)
+int	map_valid(t_game **game, int fd)
 {
 	char			*str;
 	int				nb;
@@ -99,10 +99,10 @@ int	map_valid(t_data **data, int fd)
 		ft_putendl_fd("The file is empty.", 2);
 		return (1);
 	}
-	if (get_textures(str, fd, data))
+	if (get_textures(str, fd, game))
 		return (1);
-	(*data)->map = get_map(fd);
-	if (!(*data)->map)
+	(*game)->map = get_map(fd);
+	if (!(*game)->map)
 	{
 		finish_gnl(fd);
 		return (1);

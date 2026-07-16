@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:45:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/15 16:46:19 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 12:33:15 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,6 @@ void	finish_gnl(int fd)
 		str = get_next_line(fd);
 	}
 	free(str);
-}
-
-void	free_data(t_data **data)
-{
-	free((*data)->so);
-	free((*data)->ea);
-	free((*data)->no);
-	free((*data)->we);
-	if ((*data)->map)
-		free_memory((*data)->map);
-	free(*data);
 }
 
 void	is_cub(char *str)

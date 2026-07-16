@@ -6,13 +6,13 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:14:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/15 16:47:39 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 13:41:50 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-static void	map_error(t_data **data)
+static void	map_error(t_game **game)
 {
 	int	resu;
 	int	y;
@@ -21,14 +21,14 @@ static void	map_error(t_data **data)
 	y = 0;
 	x = 0;
 	resu = 0;
-	while ((*data)->map[y])
+	while ((*game)->map[y])
 	{
-		if (x == 0 && ((*data)->map[y][x] != '1' && (*data)->map[y][x] != ' '))
-			map_is_error(data);
-		if ((*data)->map[y][x] == '0')
-			is_map_is_error(data, x, y);
+		if (x == 0 && ((*game)->map[y][x] != '1' && (*game)->map[y][x] != ' '))
+			map_is_error(game);
+		if ((*game)->map[y][x] == '0')
+			is_map_is_error(game, x, y);
 		x++;
-		if ((*data)->map[y][x] == '\n' || (*data)->map[y][x] == 0)
+		if ((*game)->map[y][x] == '\n' || (*game)->map[y][x] == 0)
 		{
 			y++;
 			x = 0;
@@ -95,25 +95,28 @@ int	map_has_what_we_need(char	**map, int y, int x)
 	return (1);
 }
 
-int	parser(t_data **data)
+int	parser(t_game **game)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	if (!map_has_what_we_need((*data)->map, y, x))
+	if (!map_has_what_we_need((*game)->map, y, x))
 		return (0);
-	while ((*data)->map[y][x] != 'N' && (*data)->map[y][x] != 'S'
-		&& (*data)->map[y][x] != 'E' && (*data)->map[y][x] != 'W')
+	while ((*game)->map[y][x] != 'N' && (*game)->map[y][x] != 'S'
+		&& (*game)->map[y][x] != 'E' && (*game)->map[y][x] != 'W')
 	{
-		if ((*data)->map[y][x] == '\n')
+		if ((*game)->map[y][x] == '\n')
 		{
 			y++;
 			x = 0;
 		}
 		x++;
 	}
-	map_error(data);
+	(*game)->py = y;
+	(*game)->px = x;
+	(*game)->angle = (*game)->map[y][x];
+	map_error(game);
 	return (1);
 }

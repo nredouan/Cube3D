@@ -6,13 +6,13 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/15 16:06:15 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 12:32:58 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-int	no(t_data **data, char *info)
+int	no(t_game **game, char *info)
 {
 	if (!info)
 	{
@@ -26,13 +26,13 @@ int	no(t_data **data, char *info)
 	// 	ft_putendl_fd("A image is not accessible.", 2);
 	// 	return (1);
 	// }
-	(*data)->no = ft_strdup(info);
-	if (!(*data)->no)
+	(*game)->no = ft_strdup(info);
+	if (!(*game)->no)
 		return (1);
 	return (0);
 }
 
-int	so(t_data **data, char *info)
+int	so(t_game **game, char *info)
 {
 	if (!info)
 	{
@@ -46,13 +46,13 @@ int	so(t_data **data, char *info)
 	// 	ft_putendl_fd("A image is not accessible.", 2);
 	// 	return (1);
 	// }
-	(*data)->so = ft_strdup(info);
-	if (!(*data)->so)
+	(*game)->so = ft_strdup(info);
+	if (!(*game)->so)
 		return (1);
 	return (0);
 }
 
-int	we(t_data **data, char *info)
+int	we(t_game **game, char *info)
 {
 	if (!info)
 	{
@@ -66,13 +66,13 @@ int	we(t_data **data, char *info)
 	// 	ft_putendl_fd("A image is not accessible.", 2);
 	// 	return (1);
 	// }
-	(*data)->we = ft_strdup(info);
-	if (!(*data)->we)
+	(*game)->we = ft_strdup(info);
+	if (!(*game)->we)
 		return (1);
 	return (0);
 }
 
-int	ea(t_data **data, char *info)
+int	ea(t_game **game, char *info)
 {
 	if (!info)
 	{
@@ -86,8 +86,8 @@ int	ea(t_data **data, char *info)
 	// 	ft_putendl_fd("A image is not accessible.", 2);
 	// 	return (1);
 	// }
-	(*data)->ea = ft_strdup(info);
-	if (!(*data)->ea)
+	(*game)->ea = ft_strdup(info);
+	if (!(*game)->ea)
 		return (1);
 	return (0);
 }

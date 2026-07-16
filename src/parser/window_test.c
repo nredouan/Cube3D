@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/16 11:32:17 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/16 13:44:14 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,36 @@ void	key_hook(int key, void *param)
 	}
 }
 
-char	**init_map(void)
+void	game_destroy(t_game *game)
 {
-	char	**map;
-	int		i = 0;
-	int		fd;
-
-	map = malloc(sizeof(char*) * 8);
-	fd = open("map.test", O_RDONLY);
-	while (i < 7)
-	{
-		map[i] = get_next_line(fd);
-		i++;
-	}
-	map[i] = NULL;
-	close(fd);
-	return (map);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
+	if (game->mlx)
+		mlx_destroy_context(game->mlx);
+	if (game->win_infos)
+		free(game->win_infos);
+	free_memory(game->map);
+	free(game->ea); // destroy image
+	free(game->no);
+	free(game->so);
+	free(game->we);
+	free(game);
 }
 
-t_game	*init_game(void)
+t_game	*init_game(int fd)
 {
 	t_game			*game;
 
-	game = malloc(sizeof(t_game));
+	game = ft_calloc(sizeof(t_game), 1);
 		//protect malloc
-	ft_bzero(game, sizeof(t_game));
-	game->win_infos = malloc(sizeof(mlx_window_create_info));
-	ft_bzero(game->win_infos, sizeof(mlx_window_create_info));
+	if (map_valid(&game, fd))
+	{
+		game_destroy(game);
+		return (NULL);
+	}
+	parser(&game);
+	game->win_infos = ft_calloc(sizeof(mlx_window_create_info), 1);
+		// protect calloc
 	game->mlx = mlx_init();
 		//protect mlx_init
 	game->win_infos->title = "cube3D";
@@ -88,29 +91,20 @@ t_game	*init_game(void)
 	game->win_infos->height = 512;
 	game->window = mlx_new_window(game->mlx, game->win_infos);
 		//protect window_init
-	game->map = init_map();
-	game->player.px = 300;
-	game->player.py = 300;
-	game->player.pa = 0;
+	
+	game->player.px = game->px * 64 + 30;
+	game->player.py = game->py * 64 + 30;
+	if (game->angle == 'S')
+		game->player.pa = PI / 2;
+	else if (game->angle == 'N')
+		game->player.pa = PI + PI / 2;
+	else if (game->angle == 'W')
+		game->player.pa = PI;
+	else
+		game->player.pa = 0;
 	game->player.dx = cosf(game->player.pa)*5;
 	game->player.dy = sinf(game->player.pa)*5;
 	return (game);
-}
-
-void	game_destroy(t_game *game)
-{
-	int	i = 0;
-	
-	mlx_destroy_window(game->mlx, game->window);
-	mlx_destroy_context(game->mlx);
-	free(game->win_infos);
-	while (game->map[i])
-	{
-		free(game->map[i]);
-		i++;
-	}
-	free(game->map);
-	free(game);
 }
 
 void	update(void *param)
@@ -124,11 +118,26 @@ void	update(void *param)
 	// draw_rays(game);
 }
 
-int	main()
+int	main(int ac, char **av)
 {
 	t_game	*game;
+	int		fd;
 
-	game = init_game();
+	if (ac != 2)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Wrong number of arguments.", 2);
+		return (1);
+	}
+	is_cub(av[1]);
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0 || fd > 1023)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Your file doesn't exist.", 2);
+		return (1);
+	}
+	game = init_game(fd);
 	mlx_on_event(game->mlx, game->window, MLX_WINDOW_EVENT, window_hook, game->mlx);
 	mlx_on_event(game->mlx, game->window, MLX_KEYDOWN, key_hook, game);
 	mlx_add_loop_hook(game->mlx, update, game);
