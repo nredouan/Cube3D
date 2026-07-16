@@ -1,14 +1,13 @@
 NAME		= cube3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -lm -g
+CFLAGS		= -Wall -Wextra -Werror -g
 RM			= rm -f
 
 OBJ_DIR		= obj
 
 VPATH		= src:src/parser
 
-SRCS 		= main.c \
-				map.c \
+SRCS 		=	map.c \
 				set_id.c \
 				t_map.c \
 				parser.c \
