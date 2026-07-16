@@ -16,6 +16,8 @@ SRCS 		= main.c \
 				get_data.c \
 				parser_utils.c \
 				utils.c \
+				window_test.c \
+				draw.c
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
@@ -32,7 +34,7 @@ INCLUDES	= -I includes -I src -I $(LIBFT_DIR)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX_SO) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
+	@$(CC) $(CFLAGS) -lm $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
 	@echo "Cube3D OK\n"
 
 $(MLX_SO) :
