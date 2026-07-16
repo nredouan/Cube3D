@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:45:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/16 12:33:15 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 15:10:50 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_memory(char **s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return ;
 	while (s[i])
 	{
 		free(s[i]);

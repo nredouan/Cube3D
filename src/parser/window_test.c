@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/16 14:47:29 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/16 15:11:28 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ void	key_hook(int key, void *param)
 
 void	game_destroy(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->ea);
-	mlx_destroy_image(game->mlx, game->no);
-	mlx_destroy_image(game->mlx, game->so);
-	mlx_destroy_image(game->mlx, game->we);
+	if (game->ea)
+		mlx_destroy_image(game->mlx, game->ea);
+	if (game->no)
+		mlx_destroy_image(game->mlx, game->no);
+	if (game->so)
+		mlx_destroy_image(game->mlx, game->so);
+	if (game->we)
+		mlx_destroy_image(game->mlx, game->we);
 	if (game->window)
 		mlx_destroy_window(game->mlx, game->window);
 	if (game->mlx)
@@ -139,6 +143,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	game = init_game(fd);
+	if (!game)
+		return (1);
 	mlx_on_event(game->mlx, game->window, MLX_WINDOW_EVENT, window_hook, game->mlx);
 	mlx_on_event(game->mlx, game->window, MLX_KEYDOWN, key_hook, game);
 	mlx_add_loop_hook(game->mlx, update, game);
