@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/15 13:06:04 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:06:15 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	so(t_data **data, char *info)
 	if (!(*data)->so)
 		return (1);
 	return (0);
-	return (0);
 }
 
 int	we(t_data **data, char *info)
@@ -71,7 +70,6 @@ int	we(t_data **data, char *info)
 	if (!(*data)->we)
 		return (1);
 	return (0);
-	return (0);
 }
 
 int	ea(t_data **data, char *info)
@@ -91,6 +89,5 @@ int	ea(t_data **data, char *info)
 	(*data)->ea = ft_strdup(info);
 	if (!(*data)->ea)
 		return (1);
-	return (0);
 	return (0);
 }

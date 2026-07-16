@@ -6,39 +6,15 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:14:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/07 18:14:39 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/15 16:47:39 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cube3d.h"
 
-void	map_is_error(t_data **data)
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd("The map is not enclosed.", 2);
-	free_data(data);
-	exit(1);
-}
-
-void	is_map_is_error(t_data **data, int x, int y)
-{
-	if (y != 0 && (!(*data)->map[y - 1][x]
-		|| (*data)->map[y - 1][x] == ' ' || (*data)->map[y - 1][x] == '\n'))
-		map_is_error(data);
-	if ((*data)->map[y + 1] && (!(*data)->map[y + 1][x]
-		|| (*data)->map[y + 1][x] == ' ' || (*data)->map[y + 1][x] == '\n'))
-		map_is_error(data);
-	if (x != 0 && (!(*data)->map[y][x - 1]
-		|| (*data)->map[y][x - 1] == ' ' || (*data)->map[y][x - 1] == '\n'))
-		map_is_error(data);
-	if (!(*data)->map[y][x + 1]
-		|| (*data)->map[y][x + 1] == ' ' || (*data)->map[y][x + 1] == '\n')
-		map_is_error(data);
-}
-
 static void	map_error(t_data **data)
 {
-	int resu;
+	int	resu;
 	int	y;
 	int	x;
 
@@ -71,7 +47,8 @@ int	is_there_a_unvalid_character(char **map, int y, int x)
 		}
 		if (!map[y])
 			break ;
-		if (map[y][x] != 'N' && map[y][x] != 'S' && map[y][x] != 'E' && map[y][x] != 'W'
+		if (map[y][x] != 'N' && map[y][x] != 'S'
+			&& map[y][x] != 'E' && map[y][x] != 'W'
 			&& map[y][x] != '0' && map[y][x] != '1' && map[y][x] != ' ')
 			return (0);
 		x++;
@@ -86,7 +63,8 @@ static int	check_map_objects(char **map, int y, int x)
 	count_player = 0;
 	while (map[y])
 	{
-		if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W')
+		if (map[y][x] == 'N' || map[y][x] == 'S'
+			|| map[y][x] == 'E' || map[y][x] == 'W')
 			count_player++;
 		x++;
 		if (map[y][x] == '\n' || map[y][x] == '\0')
@@ -98,7 +76,7 @@ static int	check_map_objects(char **map, int y, int x)
 	if (count_player != 1)
 	{
 		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("There is not the right amount of start position player", 2);
+		ft_putendl_fd("There is not the right amount of start position", 2);
 		return (0);
 	}
 	return (1);

@@ -13,6 +13,9 @@ SRCS 		= main.c \
 				t_map.c \
 				parser.c \
 				set_fandc.c \
+				get_data.c \
+				parser_utils.c \
+				utils.c \
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
