@@ -1,11 +1,12 @@
 NAME		= cube3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -lm
+CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -f
 
 OBJ_DIR		= obj
 
-SRCS 		= window_test.c
+SRCS 		= window_test.c \
+				draw.c
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
@@ -22,7 +23,7 @@ INCLUDES	= -I includes -I src -I $(LIBFT_DIR)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX_SO) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
+	@$(CC) $(CFLAGS) -lm $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
 	@echo "Cube3D OK\n"
 
 $(MLX_SO) :

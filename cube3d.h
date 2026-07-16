@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:33:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/12 11:04:20 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/15 17:17:27 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define RED "\033[0;31m"
 # define END "\033[0m"
 # define PI 3.1415926535
+# define PI2 (2*PI)
 
 typedef	struct	s_player
 {
@@ -42,6 +43,11 @@ typedef struct	s_game
 	mlx_window_create_info	*win_infos;
 	mlx_window				window;
 	t_player				player;
+	char					**map;
 }		t_game;
+
+void	draw_map(t_game *game);
+void	draw_player(t_game *game);
+void	draw_rays(t_game *game);
 
 #endif

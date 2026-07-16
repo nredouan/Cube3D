@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/12 11:11:28 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/15 17:18:58 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,7 @@ void	key_hook(int key, void *param)
 	game = param;
 	if (key == SDL_SCANCODE_ESCAPE)
 		mlx_loop_end(game->mlx);
-	if (key == SDL_SCANCODE_UP)
-		game->player.py -= 5;
-	if (key == SDL_SCANCODE_DOWN)
-		game->player.py += 5;
-	if (key == SDL_SCANCODE_LEFT)
-		game->player.px -= 5;
-	if (key == SDL_SCANCODE_RIGHT)
-		game->player.px += 5;
-	if (key == SDL_SCANCODE_Q)//a changer par A
+	if (key == SDL_SCANCODE_A)
 	{
 		game->player.pa -= 0.1;
 		if (game->player.pa < 0)
@@ -50,7 +42,7 @@ void	key_hook(int key, void *param)
 		game->player.dx = cosf(game->player.pa)*5;
 		game->player.dy = sinf(game->player.pa)*5;
 	}
-	if (key == SDL_SCANCODE_Z)//a changer par W
+	if (key == SDL_SCANCODE_W)
 	{
 		game->player.px += game->player.dx;
 		game->player.py += game->player.dy;
@@ -61,6 +53,24 @@ void	key_hook(int key, void *param)
 		game->player.py -= game->player.dy;
 	}
 	
+}
+
+char	**init_map()
+{
+	char	**map;
+	int		i = 0;
+	int		fd;
+
+	map = malloc(sizeof(char*) * 8);
+	fd = open("map.test", O_RDONLY);
+	while (i < 7)
+	{
+		map[i] = get_next_line(fd);
+		i++;
+	}
+	map[i] = NULL;
+	close(fd);
+	return (map);
 }
 
 t_game	*init_game(void)
@@ -84,33 +94,23 @@ t_game	*init_game(void)
 	game->player.pa = 0;
 	game->player.dx = cosf(game->player.pa)*5;
 	game->player.dy = sinf(game->player.pa)*5;
+	game->map = init_map();
 	return (game);
-}
-
-void	draw_player(t_game	*game)
-{
-	mlx_color	green;
-	int			i = 0;
-	int			j = 0;
-	
-	green.rgba = 0x00FF00FF;
-	while( i < 8)
-	{
-		j = 0;
-		while (j < 8)
-		{
-			mlx_pixel_put(game->mlx, game->window, game->player.px + i, game->player.py + j, green);
-			j++;
-		}
-		i++;
-	}
 }
 
 void	game_destroy(t_game *game)
 {
+	int	i = 0;
+	
 	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_context(game->mlx);
 	free(game->win_infos);
+	while (game->map[i])
+	{
+		free(game->map[i]);
+		i++;
+	}
+	free(game->map);
 	free(game);
 }
 
@@ -120,7 +120,9 @@ void	update(void *param)
 
 	game = param;
 	mlx_clear_window(game->mlx, game->window, (mlx_color)0xFFu);
+	draw_map(game);
 	draw_player(game);
+	// draw_rays(game);
 }
 
 int	main()
