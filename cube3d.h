@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:33:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/16 13:57:04 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/21 11:37:40 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@
 
 typedef	struct	s_player
 {
-	float	px;
-	float	py;
-	float	dx;
-	float	dy;
-	float	pa;
+	float	pos_x;
+	float	pos_y;
+	float	dir_x;
+	float	dir_y;
+	float	angle;
 }			t_player;
 
 typedef struct	s_game
