@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:47:30 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/16 13:34:22 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../../cub3d.h"
 
 void	map_is_error(t_game **game)
 {

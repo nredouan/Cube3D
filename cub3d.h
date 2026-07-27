@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:33:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/21 11:37:40 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/23 15:03:19 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,18 +26,39 @@
 # define RED "\033[0;31m"
 # define END "\033[0m"
 # define PI 3.1415926535
-# define PI2 (2*PI)
+# define WIDTH 1920
+# define HEIGHT 1080
+# define WALL_COLOR 0x00FF00FF
 
-typedef	struct	s_player
+typedef struct s_player
 {
 	float	pos_x;
 	float	pos_y;
 	float	dir_x;
 	float	dir_y;
 	float	angle;
+	float	plane_x;
+	float	plane_y;
 }			t_player;
 
-typedef struct	s_game
+typedef struct s_ray
+{
+	double	x;
+	float	camera_x;
+	float	dir_x;
+	float	dir_y;
+	int		map_x;
+	int		map_y;
+	float	delta_x;
+	float	delta_y;
+	int		step_x;
+	int		step_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	int		side;
+}			t_ray;
+
+typedef struct s_game
 {
 	mlx_context				mlx;
 	mlx_window_create_info	*win_infos;
@@ -53,6 +74,9 @@ typedef struct	s_game
 	int						py;
 	int						px;
 	char					angle;
+	float					perp_wall_dist;
+	float					hit_x;
+	float					hit_y;
 }		t_game;
 
 typedef struct s_mlx
@@ -109,8 +133,17 @@ int		send_info(const t_set_id *list,
 			int fd, char *str, t_game **game);
 int		map_valid(t_game **game, int fd);
 int		identifier_good(char *str);
+
+//raycasting
+void	calc_rays(t_game *game);
+
+//drawing
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
-void	draw_rays(t_game *game);
+void	draw_walls(t_game *game, int side, double x);
+
+//hook
+void	key_hook(int key, void *param);
+void	window_hook(int event, void *param);
 
 #endif

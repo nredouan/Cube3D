@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 13:20:18 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/07 15:51:21 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../../cub3d.h"
 
 int	ft_tmapsize(t_map *lst)
 {

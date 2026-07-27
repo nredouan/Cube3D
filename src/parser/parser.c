@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:14:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/16 13:41:50 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../../cub3d.h"
 
 static void	map_error(t_game **game)
 {
@@ -114,8 +114,8 @@ int	parser(t_game **game)
 		}
 		x++;
 	}
-	(*game)->py = y;
 	(*game)->px = x;
+	(*game)->py = y;
 	(*game)->angle = (*game)->map[y][x];
 	map_error(game);
 	return (1);

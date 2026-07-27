@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_id.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/16 14:57:42 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../../cub3d.h"
 
 char	*get_good_info(char *info)
 {

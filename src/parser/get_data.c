@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:44:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/16 12:14:36 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "../../cub3d.h"
 
 int	identifier_good(char *str)
 {

@@ -1,13 +1,14 @@
-NAME		= cube3D
+NAME		= cub3D
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 RM			= rm -f
 
 OBJ_DIR		= obj
 
-VPATH		= src:src/parser
+VPATH		= src:src/parser:src/draw:src/raycasting:src/hook
 
-SRCS 		=	map.c \
+SRCS 		=	main.c \
+				map.c \
 				set_id.c \
 				t_map.c \
 				parser.c \
@@ -15,8 +16,10 @@ SRCS 		=	map.c \
 				get_data.c \
 				parser_utils.c \
 				utils.c \
-				window_test.c \
-				draw.c
+				draw.c \
+				draw_map.c \
+				raycasting.c \
+				hook.c
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
@@ -34,7 +37,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX_SO) $(OBJS)
 	@$(CC) $(CFLAGS) -lm $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
-	@echo "Cube3D OK\n"
+	@echo "cub3D OK\n"
 
 $(MLX_SO) :
 	@git clone $(MLX_REPO) $(MLX_DIR)
@@ -56,7 +59,7 @@ clean:
 fclean: clean
 	@$(RM) -r $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo "Cube3D removed\n"
+	@echo "cub3D removed\n"
 
 re: fclean all
 
