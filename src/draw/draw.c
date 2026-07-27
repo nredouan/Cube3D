@@ -6,13 +6,13 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/27 17:40:41 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/27 17:46:54 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	draw_line(int tex_x, t_game *game, int line_height, double x, mlx_image	image)
+void	draw_line(int tex_x, t_game *game, int line_height, double x)
 {
 	int	pixel;
 	int	draw_start;
@@ -34,7 +34,7 @@ void	draw_line(int tex_x, t_game *game, int line_height, double x, mlx_image	ima
 			tex_y = 0;
     	if (tex_y >= game->so_height)
 			tex_y = game->so_height - 1;
-		color = mlx_get_image_pixel(game->mlx, image, tex_x, tex_y);
+		color = mlx_get_image_pixel(game->mlx, game->so, tex_x, tex_y);
 		mlx_pixel_put(game->mlx, game->window, x, pixel, color);
 		pixel++;
 	}
@@ -69,14 +69,16 @@ void	draw_walls(t_game *game, int side, double x)
 	
 	int			line_height;
 	double		wallX;
-	mlx_image	image;
+	// mlx_image	image;
 
 	if (side == 0)
+	{
     	wallX = game->hit_y;
+	}
 	else
     	wallX = game->hit_x;
 	wallX -= floor(wallX);
 	int tex_x = (int)(wallX * (double)game->so_width);
 	line_height = HEIGHT / game->perp_wall_dist;
-	draw_line(tex_x, game, line_height, x, image);
+	draw_line(tex_x, game, line_height, x);
 }
