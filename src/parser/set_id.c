@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_id.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/27 17:38:23 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,12 @@ int	no(t_game **game, char *info)
 
 int	so(t_game **game, char *info)
 {
-	int		i[1];
 	int		j;
 	int		count;
 	char	*cpy;
 
 	j = 0;
 	count = 0;
-	i[0] = 64;
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -71,7 +69,7 @@ int	so(t_game **game, char *info)
 		return (1);
 	}
 	cpy = get_good_info(info);
-	(*game)->so = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	(*game)->so = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->so_width, &(*game)->so_height);
 	if (!(*game)->so)
 		return (1);
 	return (0);

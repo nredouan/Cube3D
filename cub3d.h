@@ -65,10 +65,12 @@ typedef struct s_game
 	mlx_window				window;
 	t_player				player;
 	char					**map;
-	void					*no;
-	void					*so;
-	void					*we;
-	void					*ea;
+	mlx_image				no;
+	mlx_image				so;
+	mlx_image				we;
+	mlx_image				ea;
+	int                     so_width;
+    int                     so_height;
 	int						f[3];
 	int						c[3];
 	int						py;
