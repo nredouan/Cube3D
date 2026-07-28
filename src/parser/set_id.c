@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/27 17:38:23 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/28 15:25:13 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*get_good_info(char *info)
 	while (info[j] == ' ')
 		j++;
 	cpy = ft_calloc(sizeof(char), ft_strlen(&info[j]));
+	if (!cpy)
+		return (NULL);
 	while (info[j + count] && info[j + count] != '\n')
 	{
 		cpy[count] = info[j + count];
@@ -48,7 +50,10 @@ int	no(t_game **game, char *info)
 		return (1);
 	}
 	cpy = get_good_info(info);
+	if (!cpy)
+		return (1);
 	(*game)->no = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	free(cpy);
 	if (!(*game)->no)
 		return (1);
 	return (0);
@@ -69,7 +74,10 @@ int	so(t_game **game, char *info)
 		return (1);
 	}
 	cpy = get_good_info(info);
+	if (!cpy)
+		return (1);
 	(*game)->so = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->so_width, &(*game)->so_height);
+	free(cpy);
 	if (!(*game)->so)
 		return (1);
 	return (0);
@@ -92,7 +100,10 @@ int	we(t_game **game, char *info)
 		return (1);
 	}
 	cpy = get_good_info(info);
+	if (!cpy)
+		return (1);
 	(*game)->we = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	free(cpy);
 	if (!(*game)->we)
 		return (1);
 	return (0);
@@ -115,7 +126,10 @@ int	ea(t_game **game, char *info)
 		return (1);
 	}
 	cpy = get_good_info(info);
+	if (!cpy)
+		return (1);
 	(*game)->ea = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	free(cpy);
 	if (!(*game)->ea)
 		return (1);
 	return (0);

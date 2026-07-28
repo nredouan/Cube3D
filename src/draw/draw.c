@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/28 14:46:06 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/28 15:43:35 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ mlx_color	get_color(int rgb[3])
 {
 	mlx_color	color;
 
-	color.rgba = (rgb[0] << 24) | (rgb[1] << 16) | (rgb[2] << 8) | 0xFF;
+	color.r = rgb[0];
+	color.g = rgb[1];
+	color.b = rgb[2];
+	color.a = 255;
 	return (color);
 }
 

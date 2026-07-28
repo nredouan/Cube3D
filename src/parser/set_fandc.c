@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_fandc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/28 16:16:14 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,27 @@
 char	**good_rgb(char *info)
 {
 	int		i;
+	int		j;
 	char	**rgb;
 
 	i = 0;
 	rgb = ft_split(info, ',');
 	while (rgb[i])
+	{
+		j = 0;
+		while (rgb[i][j])
+		{
+			if (rgb[i][j] != '\n' && !ft_isdigit(rgb[i][j]))
+			{
+				ft_putendl_fd("Error", 2);
+				ft_putendl_fd("Rgb need to be only number.", 2);
+				free_memory(rgb);
+				return (NULL);
+			}
+			j++;
+		}
 		i++;
+	}
 	if (i > 3)
 	{
 		ft_putendl_fd("Error", 2);
