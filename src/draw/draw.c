@@ -6,11 +6,32 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/27 17:46:54 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/28 13:25:58 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	draw_ceiling(t_game *game, int draw_start, double x)
+{
+	int	i;
+
+	i = 0;
+	while (i < draw_start)
+	{
+		mlx_pixel_put(game->mlx, game->window, x, i, game->color_c);
+		i++;
+	}
+}
+
+void	draw_floor(t_game *game, int pixel, double x)
+{
+	while (pixel < HEIGHT)
+	{
+		mlx_pixel_put(game->mlx, game->window, x, pixel, game->color_f);
+		pixel++;
+	}
+}
 
 void	draw_line(int tex_x, t_game *game, int line_height, double x)
 {
@@ -26,6 +47,7 @@ void	draw_line(int tex_x, t_game *game, int line_height, double x)
 	if (draw_end > HEIGHT)
 		draw_end = HEIGHT - 1;
 	pixel = draw_start;
+	draw_ceiling(game, draw_start, x);
 	while (pixel < draw_end)
 	{
 		double d = pixel - HEIGHT / 2.0 + line_height / 2.0;
@@ -38,6 +60,7 @@ void	draw_line(int tex_x, t_game *game, int line_height, double x)
 		mlx_pixel_put(game->mlx, game->window, x, pixel, color);
 		pixel++;
 	}
+	draw_floor(game, pixel, x);
 }
 
 void	draw_player(t_game *game)
@@ -64,6 +87,14 @@ void	draw_player(t_game *game)
 		game->player.pos_y * 12 - 2, 5, 5, green);
 }
 
+mlx_color get_color(int rgb[3])
+{
+    mlx_color color;
+
+    color.rgba = (rgb[0] << 24) | (rgb[1] << 16) | (rgb[2] << 8) | 0xFF;
+    return (color);
+}
+
 void	draw_walls(t_game *game, int side, double x)
 {
 	
@@ -71,10 +102,10 @@ void	draw_walls(t_game *game, int side, double x)
 	double		wallX;
 	// mlx_image	image;
 
+	game->color_c = get_color(game->c);
+	game->color_f = get_color(game->f);
 	if (side == 0)
-	{
     	wallX = game->hit_y;
-	}
 	else
     	wallX = game->hit_x;
 	wallX -= floor(wallX);

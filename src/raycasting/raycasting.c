@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:53:59 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/27 17:26:34 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/28 13:16:00 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	calc_rays(t_game *game)
 	ray.x = 0;
 	game->player.plane_x = -(game->player.dir_y) * 0.66;
 	game->player.plane_y = game->player.dir_x * 0.66;
-	
 	while (ray.x < WIDTH)
 	{
 		init_ray(game, &ray);

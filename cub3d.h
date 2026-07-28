@@ -72,7 +72,9 @@ typedef struct s_game
 	int                     so_width;
     int                     so_height;
 	int						f[3];
+	mlx_color				color_f;
 	int						c[3];
+	mlx_color				color_c;
 	int						py;
 	int						px;
 	char					angle;
