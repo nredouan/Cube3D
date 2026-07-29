@@ -6,96 +6,28 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 14:12:27 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:38:04 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	draw_ceiling(t_game *game, int draw_start, double x)
-{
-	int	i;
-
-	i = 0;
-	while (i < draw_start)
-	{
-		mlx_pixel_put(game->mlx, game->window, x, i, game->color_c);
-		i++;
-	}
-}
-
-void	draw_floor(t_game *game, int pixel, double x)
-{
-	while (pixel < HEIGHT)
-	{
-		mlx_pixel_put(game->mlx, game->window, x, pixel, game->color_f);
-		pixel++;
-	}
-}
-
-void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray)
-{
-	int			pixel;
-	int			draw_start;
-	int			draw_end;
-	mlx_color	color;
-	mlx_image	wall;
-	double		d;
-	int			tex_y;
-
-	draw_start = -line_height / 2 + HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + HEIGHT / 2;
-	if (draw_end > HEIGHT)
-		draw_end = HEIGHT - 1;
-	pixel = draw_start;
-	draw_ceiling(game, draw_start, ray.x);
-	if (ray.side == 1)
-	{
-		if (ray.dir_y < 0)
-			wall = game->no;
-		else
-			wall = game->so;
-	}
-	else
-	{
-		if (ray.dir_x < 0)
-			wall = game->we;
-		else
-			wall = game->ea;
-	}
-	while (pixel < draw_end)
-	{
-		d = pixel - HEIGHT / 2.0 + line_height / 2.0;
-		tex_y = (int)(d * game->so_height / line_height);
-		if (tex_y < 0)
-			tex_y = 0;
-		if (tex_y >= game->so_height)
-			tex_y = game->so_height - 1;
-		color = mlx_get_image_pixel(game->mlx, wall, tex_x, tex_y);
-		mlx_pixel_put(game->mlx, game->window, ray.x, pixel, color);
-		pixel++;
-	}
-	draw_floor(game, pixel, ray.x);
-}
-
 static void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
 {
 	int		pixels;
-	double	pixelX;
-	double	pixelY;
+	double	pixel_x;
+	double	pixel_y;
 
 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
 	deltax /= pixels;
 	deltay /= pixels;
-	pixelX = game->player.pos_x * 6;
-	pixelY = game->player.pos_y * 6;
+	pixel_x = game->player.pos_x * 6;
+	pixel_y = game->player.pos_y * 6;
 	while (pixels)
 	{
-		mlx_pixel_put(game->mlx, game->window, pixelX, pixelY,color);
-		pixelX += deltax;
-		pixelY += deltay;
+		mlx_pixel_put(game->mlx, game->window, pixel_x, pixel_y, color);
+		pixel_x += deltax;
+		pixel_y += deltay;
 		pixels--;
 	}
 }
@@ -154,17 +86,17 @@ mlx_color	get_color(int rgb[3])
 void	draw_walls(t_game *game, t_ray ray)
 {
 	int			line_height;
-	double		wallX;
 	int			tex_x;
+	double		wall_x;
 
 	game->color_c = get_color(game->c);
 	game->color_f = get_color(game->f);
 	if (ray.side == 0)
-		wallX = game->hit_y;
+		wall_x = game->hit_y;
 	else
-		wallX = game->hit_x;
-	wallX -= floor(wallX);
-	tex_x = (int)(wallX * (double)game->so_width);
+		wall_x = game->hit_x;
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * (double)game->so_width);
 	line_height = HEIGHT / game->perp_wall_dist;
 	if (ray.x == 0)
 	{

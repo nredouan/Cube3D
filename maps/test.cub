@@ -1,7 +1,7 @@
-NO    textures/1X4A4218-Modifier1.jpg
-SO    textures/wallW.jpeg
-WE    textures/Image_1758056007561.jpg
-EA    textures/cat.jpg
+NO    textures/wallN.jpeg
+SO    textures/wallS.jpeg
+WE    textures/wallW.jpeg
+EA    textures/wallE.jpeg
 
 F 41,134,204
 C 225,30,0

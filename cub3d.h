@@ -69,8 +69,8 @@ typedef struct s_game
 	mlx_image				so;
 	mlx_image				we;
 	mlx_image				ea;
-	int                     so_width;
-    int                     so_height;
+	int						so_width;
+	int						so_height;
 	int						f[3];
 	mlx_color				color_f;
 	int						c[3];
@@ -142,6 +142,9 @@ int		send_info(const t_set_id *list,
 int		map_valid(t_game **game, int fd);
 int		identifier_good(char *str);
 
+//init game
+t_game	*init_game(int fd);
+
 //raycasting
 void	calc_rays(t_game *game);
 
@@ -149,6 +152,7 @@ void	calc_rays(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	draw_walls(t_game *game, t_ray ray);
+void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray);
 
 //hook
 void	key_hook(int key, void *param);

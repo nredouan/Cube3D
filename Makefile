@@ -5,7 +5,7 @@ RM			= rm -f
 
 OBJ_DIR		= obj
 
-VPATH		= src:src/parser:src/draw:src/raycasting:src/hook
+VPATH		= src:src/parser:src/draw:src/raycasting:src/hook:src/init_game
 
 SRCS 		=	main.c \
 				map.c \
@@ -18,8 +18,10 @@ SRCS 		=	main.c \
 				utils.c \
 				draw.c \
 				draw_map.c \
+				draw_view.c \
 				raycasting.c \
-				hook.c
+				hook.c \
+				init.c
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
