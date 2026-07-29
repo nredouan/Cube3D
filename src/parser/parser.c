@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:14:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:29:09 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static void	map_error(t_game **game)
 	resu = 0;
 	while ((*game)->map[y])
 	{
-		if (x == 0 && ((*game)->map[y][x] != '1' && (*game)->map[y][x] != ' '))
-			map_is_error(game);
 		if ((*game)->map[y][x] == '0')
 			is_map_is_error(game, x, y);
 		x++;

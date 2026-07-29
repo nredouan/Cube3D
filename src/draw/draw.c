@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 14:38:04 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 16:09:28 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	draw_walls(t_game *game, t_ray ray)
 	else
 		wall_x = game->hit_x;
 	wall_x -= floor(wall_x);
-	tex_x = (int)(wall_x * (double)game->so_width);
+	tex_x = (int)(wall_x * (double)game->image_width);
 	line_height = HEIGHT / game->perp_wall_dist;
 	if (ray.x == 0)
 	{

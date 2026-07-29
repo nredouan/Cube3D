@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:46:32 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,44 @@ int	line_is_good(char *str)
 	return (1);
 }
 
+int	str_is_white_space(char *c)
+{
+	int	i;
+
+	i = 0;
+	while (c[i] == ' ' || (c[i] >= 9 && c[i] <= 13))
+		i++;
+	if (!c[i])
+		return (0);
+	return (1);
+}
+
+int	finish_gnl_of_the_map(int fd)
+{
+	char	*str;
+	int		r;
+
+	r = 0;
+	str = get_next_line(fd);
+	while (str)
+	{
+		if (r == 0 && str_is_white_space(str))
+		{
+			ft_putendl_fd("Error", 2);
+			ft_putendl_fd("The map need to be the last thing in the file", 2);
+			r++;
+		}
+		free(str);
+		str = get_next_line(fd);
+	}
+	free(str);
+	return (r);
+}
+
 t_map	*make_map(int fd, t_map *new, t_map *maps)
 {
 	char	*str;
+	int		resu;
 
 	str = get_next_line(fd);
 	while (line_is_good(str))
@@ -61,7 +96,7 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 		free(str);
 		str = get_next_line(fd);
 	}
-	while (str)
+	while (str && str_is_white_space(str))
 	{
 		new = ft_lstnew_file(str);
 		free(str);
@@ -75,6 +110,16 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 		}
 		str = get_next_line(fd);
 	}
+	if (str)
+	{
+		resu = finish_gnl_of_the_map(fd);
+		if (resu)
+		{
+			free(str);
+			free_tmap(&maps);
+			return (NULL);
+		}
+	}
 	return (maps);
 }
 
@@ -82,11 +127,15 @@ char	**get_map(int fd)
 {
 	t_map	*maps;
 	t_map	*new;
+	t_map	*pre;
 	char	**real_map;
 
 	maps = NULL;
 	new = NULL;
+	pre = NULL;
 	maps = make_map(fd, new, maps);
+	if (!maps)
+		return (NULL);
 	real_map = create_map(maps);
 	free_tmap(&maps);
 	if (!real_map)
