@@ -81,7 +81,11 @@ typedef struct s_game
 	float					perp_wall_dist;
 	float					hit_x;
 	float					hit_y;
-}		t_game;
+	float					left_ray_hit_x;
+	float					left_ray_hit_y;
+	float					right_ray_hit_x;
+	float					right_ray_hit_y;
+}							t_game;
 
 typedef struct s_mlx
 {
@@ -144,7 +148,7 @@ void	calc_rays(t_game *game);
 //drawing
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
-void	draw_walls(t_game *game, int side, double x);
+void	draw_walls(t_game *game, t_ray ray);
 
 //hook
 void	key_hook(int key, void *param);

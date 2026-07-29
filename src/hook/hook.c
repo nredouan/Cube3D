@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 17:16:21 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/24 17:50:16 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/27 16:19:55 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	turn(int key, t_game *game)
 	if (key == SDL_SCANCODE_A)
 	{
 		game->player.angle -= 0.1;
-		if (game->player.angle < 0)
+		if (game->player.angle <= 0)
 			game->player.angle += 2 * PI;
 		game->player.dir_x = cosf(game->player.angle);
 		game->player.dir_y = sinf(game->player.angle);

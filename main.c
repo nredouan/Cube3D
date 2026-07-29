@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/24 17:58:17 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/27 16:51:24 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_game	*init_game(int fd)
 	else if (game->angle == 'W')
 		game->player.angle = PI;
 	else
-		game->player.angle = 0;
+		game->player.angle = 2 * PI;
 	game->player.dir_x = cosf(game->player.angle);
 	game->player.dir_y = sinf(game->player.angle);
 	game->player.plane_x = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:53:59 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/28 13:16:00 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/29 11:42:55 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	calc_rays(t_game *game)
 		game->hit_x = game->player.pos_x + ray.dir_x * game->perp_wall_dist;
 		game->hit_y = game->player.pos_y + ray.dir_y * game->perp_wall_dist;
 		draw_walls(game, ray.side, ray.x);
+		draw_walls(game, ray);
 		ray.x++;
 	}
 }
