@@ -69,8 +69,8 @@ typedef struct s_game
 	mlx_image				so;
 	mlx_image				we;
 	mlx_image				ea;
-	int                     so_width;
-    int                     so_height;
+	int                     image_width;
+    int                     image_height;
 	int						f[3];
 	mlx_color				color_f;
 	int						c[3];
@@ -124,6 +124,7 @@ char	**get_map(int fd);
 // t_map
 void	ft_lstadd_back_map(t_map **lst, t_map *new);
 t_map	*ft_lstnew_file(char *str);
+t_map	*ft_lstlast_map(t_map *lst);
 int		ft_tmapsize(t_map *lst);
 void	free_tmap(t_map **map);
 

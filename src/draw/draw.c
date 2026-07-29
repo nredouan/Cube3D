@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 14:12:27 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:58:15 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray)
 	while (pixel < draw_end)
 	{
 		d = pixel - HEIGHT / 2.0 + line_height / 2.0;
-		tex_y = (int)(d * game->so_height / line_height);
+		tex_y = (int)(d * game->image_height / line_height);
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= game->so_height)
-			tex_y = game->so_height - 1;
+		if (tex_y >= game->image_height)
+			tex_y = game->image_height - 1;
 		color = mlx_get_image_pixel(game->mlx, wall, tex_x, tex_y);
 		mlx_pixel_put(game->mlx, game->window, ray.x, pixel, color);
 		pixel++;
@@ -164,7 +164,7 @@ void	draw_walls(t_game *game, t_ray ray)
 	else
 		wallX = game->hit_x;
 	wallX -= floor(wallX);
-	tex_x = (int)(wallX * (double)game->so_width);
+	tex_x = (int)(wallX * (double)game->image_width);
 	line_height = HEIGHT / game->perp_wall_dist;
 	if (ray.x == 0)
 	{

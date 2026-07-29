@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_id.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/29 13:32:20 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:57:53 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ char	*get_good_info(char *info)
 
 int	no(t_game **game, char *info)
 {
-	int		i[1];
 	int		j;
 	int		count;
 	char	*cpy;
 
 	j = 0;
 	count = 0;
-	i[0] = 64;
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -52,10 +50,14 @@ int	no(t_game **game, char *info)
 	cpy = get_good_info(info);
 	if (!cpy)
 		return (1);
-	(*game)->no = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	(*game)->no = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->no)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
+	}
 	return (0);
 }
 
@@ -76,23 +78,25 @@ int	so(t_game **game, char *info)
 	cpy = get_good_info(info);
 	if (!cpy)
 		return (1);
-	(*game)->so = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->so_width, &(*game)->so_height);
+	(*game)->so = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->so)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
+	}
 	return (0);
 }
 
 int	we(t_game **game, char *info)
 {
-	int		i[1];
 	int		j;
 	int		count;
 	char	*cpy;
 
 	j = 0;
 	count = 0;
-	i[0] = 64;
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -102,23 +106,25 @@ int	we(t_game **game, char *info)
 	cpy = get_good_info(info);
 	if (!cpy)
 		return (1);
-	(*game)->we = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	(*game)->we = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->we)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
+	}
 	return (0);
 }
 
 int	ea(t_game **game, char *info)
 {
-	int		i[1];
 	int		j;
 	int		count;
 	char	*cpy;
 
 	j = 0;
 	count = 0;
-	i[0] = 64;
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -128,9 +134,13 @@ int	ea(t_game **game, char *info)
 	cpy = get_good_info(info);
 	if (!cpy)
 		return (1);
-	(*game)->ea = mlx_new_image_from_file((*game)->mlx, cpy, i, i);
+	(*game)->ea = mlx_new_image_from_file((*game)->mlx, cpy, &(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->ea)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
+	}
 	return (0);
 }
