@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:38:45 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/27 14:34:37 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 13:44:48 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	setup_colors(mlx_color *pixels, uint32_t color)
 
 	i = 0;
 	y = 0;
-	while (y < 12)
+	while (y < 6)
 	{
 		x = 0;
-		while (x < 12)
+		while (x < 6)
 		{
 			pixels[i].rgba = color;
 			i++;
@@ -35,25 +35,25 @@ static void	setup_colors(mlx_color *pixels, uint32_t color)
 
 void	draw_map(t_game *game)
 {
-	mlx_color	pixels_b[144];
-	mlx_color	pixels_w[144];
+	mlx_color	pixels_b[6 * 6];
+	mlx_color	pixels_w[6 * 6];
 	int			y;
 	int			x;
 
 	y = 0;
-	setup_colors(pixels_b, 0xFFFFFFFF);
-	setup_colors(pixels_w, 0x8080808A);
+	setup_colors(pixels_b, 0xFFFFFFF0);
+	setup_colors(pixels_w, 0x80808080);
 	while (game->map[y])
 	{
 		x = 0;
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '1')
-				mlx_pixel_put_region(game->mlx, game->window, x * 12, y * 12,
-					12, 12, pixels_b);
+				mlx_pixel_put_region(game->mlx, game->window, x * 6, y * 6,
+					6, 6, pixels_b);
 			else if (game->map[y][x] != '\n' && game->map[y][x] != ' ')
-				mlx_pixel_put_region(game->mlx, game->window, x * 12, y * 12,
-					12, 12, pixels_w);
+				mlx_pixel_put_region(game->mlx, game->window, x * 6, y * 6,
+					6, 6, pixels_w);
 			x++;
 		}
 		y++;

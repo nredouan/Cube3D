@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 11:42:42 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:12:27 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void	draw_floor(t_game *game, int pixel, double x)
 	}
 }
 
-void	draw_line(int tex_x, t_game *game, int line_height, double x)
+void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray)
 {
 	int			pixel;
 	int			draw_start;
 	int			draw_end;
 	mlx_color	color;
+	mlx_image	wall;
 	double		d;
 	int			tex_y;
 
@@ -49,7 +50,21 @@ void	draw_line(int tex_x, t_game *game, int line_height, double x)
 	if (draw_end > HEIGHT)
 		draw_end = HEIGHT - 1;
 	pixel = draw_start;
-	draw_ceiling(game, draw_start, x);
+	draw_ceiling(game, draw_start, ray.x);
+	if (ray.side == 1)
+	{
+		if (ray.dir_y < 0)
+			wall = game->no;
+		else
+			wall = game->so;
+	}
+	else
+	{
+		if (ray.dir_x < 0)
+			wall = game->we;
+		else
+			wall = game->ea;
+	}
 	while (pixel < draw_end)
 	{
 		d = pixel - HEIGHT / 2.0 + line_height / 2.0;
@@ -58,10 +73,11 @@ void	draw_line(int tex_x, t_game *game, int line_height, double x)
 			tex_y = 0;
 		if (tex_y >= game->so_height)
 			tex_y = game->so_height - 1;
-		color = mlx_get_image_pixel(game->mlx, game->so, tex_x, tex_y);
-		mlx_pixel_put(game->mlx, game->window, x, pixel, color);
+		color = mlx_get_image_pixel(game->mlx, wall, tex_x, tex_y);
+		mlx_pixel_put(game->mlx, game->window, ray.x, pixel, color);
 		pixel++;
 	}
+	draw_floor(game, pixel, ray.x);
 }
 
 static void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
@@ -73,8 +89,8 @@ static void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
 	deltax /= pixels;
 	deltay /= pixels;
-	pixelX = game->player.pos_x * 12;
-	pixelY = game->player.pos_y * 12;
+	pixelX = game->player.pos_x * 6;
+	pixelY = game->player.pos_y * 6;
 	while (pixels)
 	{
 		mlx_pixel_put(game->mlx, game->window, pixelX, pixelY,color);
@@ -82,7 +98,6 @@ static void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
 		pixelY += deltay;
 		pixels--;
 	}
-	draw_floor(game, pixel, x);
 }
 
 static void	calculate_delta(t_game *game)
@@ -92,27 +107,27 @@ static void	calculate_delta(t_game *game)
 	float		deltay;
 
 	color.rgba = 0xFF0000FF;
-	deltax = ((game->left_ray_hit_x) * 12) - game->player.pos_x * 12;
-	deltay = ((game->left_ray_hit_y) * 12) - game->player.pos_y * 12;
+	deltax = ((game->left_ray_hit_x) * 6) - game->player.pos_x * 6;
+	deltay = ((game->left_ray_hit_y) * 6) - game->player.pos_y * 6;
 	draw_fov(game, deltax, deltay, color);
-	deltax = ((game->right_ray_hit_x) * 12) - game->player.pos_x * 12;
-	deltay = ((game->right_ray_hit_y) * 12) - game->player.pos_y * 12;
+	deltax = ((game->right_ray_hit_x) * 6) - game->player.pos_x * 6;
+	deltay = ((game->right_ray_hit_y) * 6) - game->player.pos_y * 6;
 	draw_fov(game, deltax, deltay, color);
 }
 
 void	draw_player(t_game *game)
 {
-	mlx_color	green[25];
+	mlx_color	green[9];
 	int			i;
 	int			x;
 	int			y;
 
 	i = 0;
 	y = 0;
-	while (y < 5)
+	while (y < 3)
 	{
 		x = 0;
-		while (x < 5)
+		while (x < 3)
 		{
 			green[i].rgba = 0x00FF00FF;
 			i++;
@@ -120,33 +135,12 @@ void	draw_player(t_game *game)
 		}
 		y++;
 	}
-	mlx_pixel_put_region(game->mlx, game->window, game->player.pos_x * 12 - 2,
-		game->player.pos_y * 12 - 2, 5, 5, green);
+	mlx_pixel_put_region(game->mlx, game->window, game->player.pos_x * 6 - 1,
+		game->player.pos_y * 6 - 1, 3, 3, green);
 	calculate_delta(game);
 }
 
 mlx_color	get_color(int rgb[3])
-static void	draw_line(t_game *game, int line_height, double x, mlx_color color)
-{
-	int	pixel;
-	int	draw_start;
-	int	draw_end;
-
-	draw_start = -line_height / 2 + HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + HEIGHT / 2;
-	if (draw_end > HEIGHT)
-		draw_end = HEIGHT - 1;
-	pixel = draw_start;
-	while (pixel <= draw_end)
-	{
-		mlx_pixel_put(game->mlx, game->window, x, pixel, color);
-		pixel++;
-	}
-}
-
-void	draw_walls(t_game *game, t_ray ray)
 {
 	mlx_color	color;
 
@@ -157,24 +151,21 @@ void	draw_walls(t_game *game, t_ray ray)
 	return (color);
 }
 
-void	draw_walls(t_game *game, int side, double x)
+void	draw_walls(t_game *game, t_ray ray)
 {
 	int			line_height;
 	double		wallX;
 	int			tex_x;
-	// mlx_image	image;
 
 	game->color_c = get_color(game->c);
 	game->color_f = get_color(game->f);
-	if (side == 0)
+	if (ray.side == 0)
 		wallX = game->hit_y;
 	else
 		wallX = game->hit_x;
 	wallX -= floor(wallX);
 	tex_x = (int)(wallX * (double)game->so_width);
 	line_height = HEIGHT / game->perp_wall_dist;
-	draw_line(tex_x, game, line_height, x);
-	color.rgba = 0x00FF00FF;
 	if (ray.x == 0)
 	{
 		game->left_ray_hit_x = game->hit_x;
@@ -185,18 +176,5 @@ void	draw_walls(t_game *game, int side, double x)
 		game->right_ray_hit_x = game->hit_x;
 		game->right_ray_hit_y = game->hit_y;
 	}
-	if (ray.side == 1)
-	{
-		if (ray.dir_y < 0)
-			color.rgba /= 2;
-		else
-			color. rgba /= 4;
-	}
-	else
-	{
-		if (ray.dir_x < 0)
-			color.rgba /= 3;
-	}
-	line_height = HEIGHT / game->perp_wall_dist;
-	draw_line(game, line_height, ray.x, color);
+	draw_line(tex_x, game, line_height, ray);
 }

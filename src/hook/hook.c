@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 17:16:21 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/27 16:19:55 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 13:20:16 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	move_f_b(int key, t_game *game, int pos_x, int pos_y)
 
 static void	move_l_r(int key, t_game *game, int pos_x, int pos_y)
 {
-	if (key == SDL_SCANCODE_Q)
+	if (key == SDL_SCANCODE_A)
 	{
 		pos_x = (int)(game->player.pos_x - (game->player.plane_x / 4));
 		pos_y = (int)(game->player.pos_y - (game->player.plane_y / 4));
@@ -51,7 +51,7 @@ static void	move_l_r(int key, t_game *game, int pos_x, int pos_y)
 		game->player.pos_x -= game->player.plane_x / 4;
 		game->player.pos_y -= game->player.plane_y / 4;
 	}
-	if (key == SDL_SCANCODE_E)
+	if (key == SDL_SCANCODE_D)
 	{
 		pos_x = (int)(game->player.pos_x + (game->player.plane_x / 4));
 		pos_y = (int)(game->player.pos_y + (game->player.plane_y / 4));
@@ -64,7 +64,7 @@ static void	move_l_r(int key, t_game *game, int pos_x, int pos_y)
 
 static void	turn(int key, t_game *game)
 {
-	if (key == SDL_SCANCODE_A)
+	if (key == SDL_SCANCODE_LEFT)
 	{
 		game->player.angle -= 0.1;
 		if (game->player.angle <= 0)
@@ -72,7 +72,7 @@ static void	turn(int key, t_game *game)
 		game->player.dir_x = cosf(game->player.angle);
 		game->player.dir_y = sinf(game->player.angle);
 	}
-	if (key == SDL_SCANCODE_D)
+	if (key == SDL_SCANCODE_RIGHT)
 	{
 		game->player.angle += 0.1;
 		if (game->player.angle > 2 * PI)
