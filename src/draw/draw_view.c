@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:15:33 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 14:34:09 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/29 16:11:32 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ static int	get_tex_y(t_game *game, int line_height, int pixel)
 	int		tex_y;
 
 	d = pixel - HEIGHT / 2.0 + line_height / 2.0;
-	tex_y = (int)(d * game->so_height / line_height);
+	tex_y = (int)(d * game->image_height / line_height);
 	if (tex_y < 0)
 		tex_y = 0;
-	if (tex_y >= game->so_height)
-		tex_y = game->so_height - 1;
+	if (tex_y >= game->image_height)
+		tex_y = game->image_height - 1;
 	return (tex_y);
 }
 
