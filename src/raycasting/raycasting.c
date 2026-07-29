@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:53:59 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/24 17:51:09 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/27 17:39:45 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	calc_rays(t_game *game)
 			game->perp_wall_dist = (ray.side_dist_y - ray.delta_y);
 		game->hit_x = game->player.pos_x + ray.dir_x * game->perp_wall_dist;
 		game->hit_y = game->player.pos_y + ray.dir_y * game->perp_wall_dist;
+		draw_walls(game, ray);
 		ray.x++;
-		draw_walls(game, ray.side, ray.x);
 	}
 }
