@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/29 15:46:32 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/30 12:46:04 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,6 @@ char	**create_map(t_map *maps)
 	return (real_map);
 }
 
-int	line_is_good(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	str_is_white_space(char *c)
-{
-	int	i;
-
-	i = 0;
-	while (c[i] == ' ' || (c[i] >= 9 && c[i] <= 13))
-		i++;
-	if (!c[i])
-		return (0);
-	return (1);
-}
-
 int	finish_gnl_of_the_map(int fd)
 {
 	char	*str;
@@ -85,6 +59,25 @@ int	finish_gnl_of_the_map(int fd)
 	return (r);
 }
 
+char	*stock_map(int fd, t_map *new, t_map **maps, char *str)
+{
+	while (str && str_is_white_space(str))
+	{
+		new = ft_lstnew_file(str);
+		free(str);
+		if (!new)
+			return (NULL);
+		ft_lstadd_back_map(maps, new);
+		if (!*maps)
+		{
+			free_tmap(&new);
+			return (NULL);
+		}
+		str = get_next_line(fd);
+	}
+	return (str);
+}
+
 t_map	*make_map(int fd, t_map *new, t_map *maps)
 {
 	char	*str;
@@ -96,26 +89,13 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 		free(str);
 		str = get_next_line(fd);
 	}
-	while (str && str_is_white_space(str))
-	{
-		new = ft_lstnew_file(str);
-		free(str);
-		if (!new)
-			return (NULL);
-		ft_lstadd_back_map(&maps, new);
-		if (!maps)
-		{
-			free_tmap(&new);
-			return (NULL);
-		}
-		str = get_next_line(fd);
-	}
+	str = stock_map(fd, new, &maps, str);
 	if (str)
 	{
 		resu = finish_gnl_of_the_map(fd);
+		free(str);
 		if (resu)
 		{
-			free(str);
 			free_tmap(&maps);
 			return (NULL);
 		}

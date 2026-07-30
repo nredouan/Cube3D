@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:47:30 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/29 14:33:37 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/30 12:02:55 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	is_map_is_error(t_game **game, int x, int y)
 	if (y == 0 || (!(*game)->map[y - 1][x]
 		|| (*game)->map[y - 1][x] == ' ' || (*game)->map[y - 1][x] == '\n'))
 		map_is_error(game);
-	if (y == (ft_tab_size((*game)->map) - 1) || ((*game)->map[y + 1] && (!(*game)->map[y + 1][x]
-		|| (*game)->map[y + 1][x] == ' ' || (*game)->map[y + 1][x] == '\n')))
+	if (y == (ft_tab_size((*game)->map) - 1)
+		|| ((*game)->map[y + 1] && (!(*game)->map[y + 1][x]
+			|| (*game)->map[y + 1][x] == ' '
+		|| (*game)->map[y + 1][x] == '\n')))
 		map_is_error(game);
 	if (x == 0 || (!(*game)->map[y][x - 1]
 		|| (*game)->map[y][x - 1] == ' ' || (*game)->map[y][x - 1] == '\n'))

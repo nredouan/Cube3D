@@ -6,11 +6,19 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/28 16:16:14 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/30 12:37:45 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+void	*not_digit(char **rgb)
+{
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd("Rgb need to be only number.", 2);
+	free_memory(rgb);
+	return (NULL);
+}
 
 char	**good_rgb(char *info)
 {
@@ -26,12 +34,7 @@ char	**good_rgb(char *info)
 		while (rgb[i][j])
 		{
 			if (rgb[i][j] != '\n' && !ft_isdigit(rgb[i][j]))
-			{
-				ft_putendl_fd("Error", 2);
-				ft_putendl_fd("Rgb need to be only number.", 2);
-				free_memory(rgb);
-				return (NULL);
-			}
+				return (not_digit(rgb));
 			j++;
 		}
 		i++;
@@ -55,12 +58,6 @@ int	arg_exist(char *info)
 		return (1);
 	}
 	return (0);
-}
-
-void	invalid_info(void)
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd("Invalid information.", 2);
 }
 
 int	f(t_game **game, char *info)

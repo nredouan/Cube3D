@@ -21,7 +21,8 @@ SRCS 		=	main.c \
 				draw_view.c \
 				raycasting.c \
 				hook.c \
-				init.c
+				init.c \
+				map_utils.c \
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

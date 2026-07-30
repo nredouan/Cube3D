@@ -121,6 +121,10 @@ void	map_is_error(t_game **game);
 int		parser(t_game **game);
 char	**get_map(int fd);
 
+// map_utils
+int		str_is_white_space(char *c);
+int		line_is_good(char *str);
+
 // t_map
 void	ft_lstadd_back_map(t_map **lst, t_map *new);
 t_map	*ft_lstnew_file(char *str);
@@ -142,6 +146,7 @@ int		send_info(const t_set_id *list,
 			int fd, char *str, t_game **game);
 int		map_valid(t_game **game, int fd);
 int		identifier_good(char *str);
+void	invalid_info(void);
 
 //init game
 t_game	*init_game(int fd);

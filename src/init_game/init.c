@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:43:54 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 15:08:24 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:28:18 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ t_game	*init_game(int fd)
 
 	game = init_struct_game(fd);
 	if (!game)
+		return (NULL);
+	if (!parser(&game))
 	{
 		game_destroy(game);
 		return (NULL);
 	}
-	parser(&game);
 	if (init_window(game))
 		return (NULL);
 	init_player(game);
