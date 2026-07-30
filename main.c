@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 15:00:19 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/30 12:54:51 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,31 @@ void	update(void *param)
 	draw_player(game);
 }
 
+static void	error_handler(char *message)
+{
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(message, 2);
+	exit(1);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
 	int		fd;
 
 	if (ac != 2)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Wrong number of arguments.", 2);
-		return (1);
-	}
+		error_handler("Wrong number of arguments.");
 	is_cub(av[1]);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || fd > 1023)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Your file doesn't exist.", 2);
-		return (1);
-	}
+		error_handler("Your file is not accessible.");
 	game = init_game(fd);
 	if (!game)
 		return (1);
-	mlx_on_event(game->mlx, game->window, MLX_WINDOW_EVENT, window_hook, game->mlx);
-	mlx_on_event(game->mlx, game->window, MLX_KEYDOWN, key_hook, game);
+	mlx_on_event(game->mlx, game->window,
+		MLX_WINDOW_EVENT, window_hook, game->mlx);
+	mlx_on_event(game->mlx, game->window,
+		MLX_KEYDOWN, key_hook, game);
 	mlx_add_loop_hook(game->mlx, update, game);
 	mlx_loop(game->mlx);
 	game_destroy(game);
