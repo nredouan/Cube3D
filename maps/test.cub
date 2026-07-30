@@ -3,9 +3,8 @@ SO    textures/wallS.jpeg
 WE    textures/wallW.jpeg
 EA    textures/wallE.jpeg
 
-F 41,134,204
-C 225,30,0
-
+C 100,40,40
+F 0,51,25
 
 
 

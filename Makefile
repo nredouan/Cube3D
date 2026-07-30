@@ -23,6 +23,7 @@ SRCS 		=	main.c \
 				hook.c \
 				init.c \
 				map_utils.c \
+				id_utils.c \
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

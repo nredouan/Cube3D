@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/30 12:01:32 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/30 14:51:04 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*get_good_info(char *info)
 	int		j;
 	int		count;
 	char	*cpy;
+	int		fd;
 
 	count = 0;
 	j = 0;
@@ -30,6 +31,13 @@ char	*get_good_info(char *info)
 		cpy[count] = info[j + count];
 		count++;
 	}
+	fd = open(cpy, O_RDONLY);
+	if (fd == -1)
+	{
+		image_does_not_exist(cpy);
+		return (NULL);
+	}
+	close(fd);
 	return (cpy);
 }
 
@@ -54,11 +62,7 @@ int	no(t_game **game, char *info)
 			&(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->no)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
-	}
 	return (0);
 }
 
@@ -83,11 +87,7 @@ int	so(t_game **game, char *info)
 			&(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->so)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
-	}
 	return (0);
 }
 
@@ -112,11 +112,7 @@ int	we(t_game **game, char *info)
 			&(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->we)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
-	}
 	return (0);
 }
 
@@ -141,10 +137,6 @@ int	ea(t_game **game, char *info)
 			&(*game)->image_width, &(*game)->image_height);
 	free(cpy);
 	if (!(*game)->ea)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Image not accessible.", 2);
 		return (1);
-	}
 	return (0);
 }
