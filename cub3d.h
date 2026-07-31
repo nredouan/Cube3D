@@ -168,6 +168,5 @@ void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color);
 //hook
 void	key_hook(int key, void *param);
 void	window_hook(int event, void *param);
-void	mouse_hook(int event, void *param);
 
 #endif
