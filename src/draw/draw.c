@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 16:09:28 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 16:21:26 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,30 @@ mlx_color	get_color(int rgb[3])
 	return (color);
 }
 
+void	change_image_value(t_game **game, int height, int width)
+{
+	(*game)->image_height = height;
+	(*game)->image_width = width;
+}
+
+static void	change_value_of_image(t_game **game, t_ray ray)
+{
+	if (ray.side == 1)
+	{
+		if (ray.dir_y < 0)
+			change_image_value(game, (*game)->texture_height[0], (*game)->texture_width[0]);
+		else
+			change_image_value(game, (*game)->texture_height[1], (*game)->texture_width[1]);
+	}
+	else
+	{
+		if (ray.dir_x < 0)
+			change_image_value(game, (*game)->texture_height[2], (*game)->texture_width[2]);
+		else
+			change_image_value(game, (*game)->texture_height[3], (*game)->texture_width[3]);
+	}
+}
+
 void	draw_walls(t_game *game, t_ray ray)
 {
 	int			line_height;
@@ -96,6 +120,7 @@ void	draw_walls(t_game *game, t_ray ray)
 	else
 		wall_x = game->hit_x;
 	wall_x -= floor(wall_x);
+	change_value_of_image(&game, ray);
 	tex_x = (int)(wall_x * (double)game->image_width);
 	line_height = HEIGHT / game->perp_wall_dist;
 	if (ray.x == 0)

@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:15:33 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 16:11:32 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 16:01:47 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ static void	draw_floor(t_game *game, int pixel, double x)
 	}
 }
 
-static mlx_image	get_wall_texture(t_game *game, t_ray ray)
+static mlx_image	get_wall_texture(t_game **game, t_ray ray)
 {
 	if (ray.side == 1)
 	{
 		if (ray.dir_y < 0)
-			return (game->no);
-		return (game->so);
+			return ((*game)->no);
+		return ((*game)->so);
 	}
 	else
 	{
 		if (ray.dir_x < 0)
-			return (game->we);
-		return (game->ea);
+			return ((*game)->we);
+		return ((*game)->ea);
 	}
 }
 
@@ -68,7 +68,6 @@ void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray)
 	int			pixel;
 	int			draw_start;
 	int			draw_end;
-	int			tex_y;
 	mlx_color	color;
 
 	draw_start = -line_height / 2 + HEIGHT / 2;
@@ -81,9 +80,8 @@ void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray)
 	draw_ceiling(game, draw_start, ray.x);
 	while (pixel < draw_end)
 	{
-		tex_y = get_tex_y(game, line_height, pixel);
-		color = mlx_get_image_pixel(game->mlx, get_wall_texture(game, ray),
-				tex_x, tex_y);
+		color = mlx_get_image_pixel(game->mlx, get_wall_texture(&game, ray),
+				tex_x, get_tex_y(game, line_height, pixel));
 		mlx_pixel_put(game->mlx, game->window, ray.x, pixel, color);
 		pixel++;
 	}
