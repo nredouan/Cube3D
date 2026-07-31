@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 15:51:23 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/31 16:28:11 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	move_view(t_game *game)
 	mlx_mouse_get_pos(game->mlx, &x, &y);
 	if (x < WIDTH / 4)
 	{
-		game->player.angle -= 0.3;
+		game->player.angle -= 0.2;
 		if (game->player.angle <= 0)
 			game->player.angle += 2 * PI;
 		game->player.dir_x = cosf(game->player.angle);
@@ -51,7 +51,7 @@ void	move_view(t_game *game)
 	}
 	if (x > WIDTH - WIDTH / 4)
 	{
-		game->player.angle += 0.3;
+		game->player.angle += 0.2;
 		if (game->player.angle > 2 * PI)
 			game->player.angle -= 2 * PI;
 		game->player.dir_x = cosf(game->player.angle);

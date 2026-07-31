@@ -163,6 +163,7 @@ void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	draw_walls(t_game *game, t_ray ray);
 void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray);
+void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color);
 
 //hook
 void	key_hook(int key, void *param);

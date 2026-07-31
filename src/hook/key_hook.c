@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 17:16:21 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 15:48:23 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/31 16:28:02 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	turn(int key, t_game *game)
 		return ;
 	if (key == SDL_SCANCODE_LEFT)
 	{
-		game->player.angle -= 0.1;
+		game->player.angle -= 0.2;
 		if (game->player.angle <= 0)
 			game->player.angle += 2 * PI;
 		game->player.dir_x = cosf(game->player.angle);
@@ -78,7 +78,7 @@ static void	turn(int key, t_game *game)
 	}
 	if (key == SDL_SCANCODE_RIGHT)
 	{
-		game->player.angle += 0.1;
+		game->player.angle += 0.2;
 		if (game->player.angle > 2 * PI)
 			game->player.angle -= 2 * PI;
 		game->player.dir_x = cosf(game->player.angle);

@@ -6,13 +6,13 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 17:16:29 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 16:21:26 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 16:32:45 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
+void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
 {
 	int		pixels;
 	double	pixel_x;
@@ -30,46 +30,6 @@ static void	draw_fov(t_game *game, float deltax, float deltay, mlx_color color)
 		pixel_y += deltay;
 		pixels--;
 	}
-}
-
-static void	calculate_delta(t_game *game)
-{
-	mlx_color	color;
-	float		deltax;
-	float		deltay;
-
-	color.rgba = 0xFF0000FF;
-	deltax = ((game->left_ray_hit_x) * 6) - game->player.pos_x * 6;
-	deltay = ((game->left_ray_hit_y) * 6) - game->player.pos_y * 6;
-	draw_fov(game, deltax, deltay, color);
-	deltax = ((game->right_ray_hit_x) * 6) - game->player.pos_x * 6;
-	deltay = ((game->right_ray_hit_y) * 6) - game->player.pos_y * 6;
-	draw_fov(game, deltax, deltay, color);
-}
-
-void	draw_player(t_game *game)
-{
-	mlx_color	green[9];
-	int			i;
-	int			x;
-	int			y;
-
-	i = 0;
-	y = 0;
-	while (y < 3)
-	{
-		x = 0;
-		while (x < 3)
-		{
-			green[i].rgba = 0x00FF00FF;
-			i++;
-			x++;
-		}
-		y++;
-	}
-	mlx_pixel_put_region(game->mlx, game->window, game->player.pos_x * 6 - 1,
-		game->player.pos_y * 6 - 1, 3, 3, green);
-	calculate_delta(game);
 }
 
 mlx_color	get_color(int rgb[3])
@@ -94,16 +54,20 @@ static void	change_value_of_image(t_game **game, t_ray ray)
 	if (ray.side == 1)
 	{
 		if (ray.dir_y < 0)
-			change_image_value(game, (*game)->texture_height[0], (*game)->texture_width[0]);
+			change_image_value(game,
+				(*game)->texture_height[0], (*game)->texture_width[0]);
 		else
-			change_image_value(game, (*game)->texture_height[1], (*game)->texture_width[1]);
+			change_image_value(game,
+				(*game)->texture_height[1], (*game)->texture_width[1]);
 	}
 	else
 	{
 		if (ray.dir_x < 0)
-			change_image_value(game, (*game)->texture_height[2], (*game)->texture_width[2]);
+			change_image_value(game,
+				(*game)->texture_height[2], (*game)->texture_width[2]);
 		else
-			change_image_value(game, (*game)->texture_height[3], (*game)->texture_width[3]);
+			change_image_value(game,
+				(*game)->texture_height[3], (*game)->texture_width[3]);
 	}
 }
 

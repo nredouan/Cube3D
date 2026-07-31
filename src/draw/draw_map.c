@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:38:45 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 13:44:48 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/31 16:32:41 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,44 @@ void	draw_map(t_game *game)
 		}
 		y++;
 	}
+}
+
+static void	calculate_delta(t_game *game)
+{
+	mlx_color	color;
+	float		deltax;
+	float		deltay;
+
+	color.rgba = 0xFF0000FF;
+	deltax = ((game->left_ray_hit_x) * 6) - game->player.pos_x * 6;
+	deltay = ((game->left_ray_hit_y) * 6) - game->player.pos_y * 6;
+	draw_fov(game, deltax, deltay, color);
+	deltax = ((game->right_ray_hit_x) * 6) - game->player.pos_x * 6;
+	deltay = ((game->right_ray_hit_y) * 6) - game->player.pos_y * 6;
+	draw_fov(game, deltax, deltay, color);
+}
+
+void	draw_player(t_game *game)
+{
+	mlx_color	green[9];
+	int			i;
+	int			x;
+	int			y;
+
+	i = 0;
+	y = 0;
+	while (y < 3)
+	{
+		x = 0;
+		while (x < 3)
+		{
+			green[i].rgba = 0x00FF00FF;
+			i++;
+			x++;
+		}
+		y++;
+	}
+	mlx_pixel_put_region(game->mlx, game->window, game->player.pos_x * 6 - 1,
+		game->player.pos_y * 6 - 1, 3, 3, green);
+	calculate_delta(game);
 }
