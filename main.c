@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/30 12:54:51 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 15:51:23 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,32 @@ void	game_destroy(t_game *game)
 	free(game);
 }
 
+void	move_view(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	mlx_mouse_get_pos(game->mlx, &x, &y);
+	if (x < WIDTH / 4)
+	{
+		game->player.angle -= 0.3;
+		if (game->player.angle <= 0)
+			game->player.angle += 2 * PI;
+		game->player.dir_x = cosf(game->player.angle);
+		game->player.dir_y = sinf(game->player.angle);
+	}
+	if (x > WIDTH - WIDTH / 4)
+	{
+		game->player.angle += 0.3;
+		if (game->player.angle > 2 * PI)
+			game->player.angle -= 2 * PI;
+		game->player.dir_x = cosf(game->player.angle);
+		game->player.dir_y = sinf(game->player.angle);
+	}
+}
+
 void	update(void *param)
 {
 	t_game	*game;
@@ -42,6 +68,8 @@ void	update(void *param)
 	calc_rays(game);
 	draw_map(game);
 	draw_player(game);
+	if (!game->is_mouse)
+		move_view(game);
 }
 
 static void	error_handler(char *message)

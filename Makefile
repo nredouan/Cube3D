@@ -20,6 +20,7 @@ SRCS 		=	main.c \
 				draw_map.c \
 				draw_view.c \
 				raycasting.c \
+				key_hook.c \
 				hook.c \
 				init.c \
 				map_utils.c \
@@ -27,11 +28,11 @@ SRCS 		=	main.c \
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
-MLX_DIR		= MacroLibX
+MLX_DIR		= includes/MacroLibX
 MLX_REPO    = https://github.com/seekrs/MacroLibX.git
 MLX_VERSION = ddfbe32
 
-LIBFT_DIR	= libft
+LIBFT_DIR	= includes/libft
 LIBMLX		= MacroLibX
 LIBFT		= $(LIBFT_DIR)/libft.a
 MLX_SO		= $(MLX_DIR)/libmlx.so -lSDL2
@@ -41,7 +42,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX_SO) $(OBJS)
 	@$(CC) $(CFLAGS) -lm $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
-	@echo "cub3D OK\n"
+	@echo "cub3D OK"
 
 $(MLX_SO) :
 	@git clone $(MLX_REPO) $(MLX_DIR)
@@ -49,7 +50,7 @@ $(MLX_SO) :
 	@make -C $(MLX_DIR) -j4
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR) all
+	@make --no-print-directory -C $(LIBFT_DIR) all
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
@@ -57,13 +58,13 @@ $(OBJ_DIR)/%.o: %.c
 
 clean: 
 	@$(RM) -r $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
-	@echo "Objects removed\n"
+	@make --no-print-directory -C $(LIBFT_DIR) clean
+	@echo "Objects removed"
 
 fclean: clean
 	@$(RM) -r $(NAME)
-	@make -C $(LIBFT_DIR) fclean
-	@echo "cub3D removed\n"
+	@make --no-print-directory -C $(LIBFT_DIR) fclean
+	@echo "cub3D removed"
 
 re: fclean all
 

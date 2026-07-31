@@ -85,6 +85,7 @@ typedef struct s_game
 	float					left_ray_hit_y;
 	float					right_ray_hit_x;
 	float					right_ray_hit_y;
+	bool					is_mouse;
 }							t_game;
 
 typedef struct s_mlx
@@ -164,5 +165,6 @@ void	draw_line(int tex_x, t_game *game, int line_height, t_ray ray);
 //hook
 void	key_hook(int key, void *param);
 void	window_hook(int event, void *param);
+void	mouse_hook(int event, void *param);
 
 #endif

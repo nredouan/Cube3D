@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:43:54 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/30 13:04:56 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 15:49:11 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ t_game	*init_game(int fd)
 	if (init_window(game))
 		return (NULL);
 	init_player(game);
+	game->is_mouse = true;
 	return (game);
 }
