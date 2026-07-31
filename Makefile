@@ -40,6 +40,8 @@ INCLUDES	= -I includes -I src -I $(LIBFT_DIR)
 
 all: $(NAME)
 
+bonus: $(NAME)
+
 $(NAME): $(LIBFT) $(MLX_SO) $(OBJS)
 	@$(CC) $(CFLAGS) -lm $(OBJS) $(LIBFT) $(MLX_SO) -o $(NAME)
 	@echo "cub3D OK"
@@ -70,4 +72,4 @@ re: fclean all
 
 rebonus : fclean bonus
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus

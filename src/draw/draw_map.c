@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:38:45 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 16:32:41 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 17:40:27 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	setup_colors(mlx_color *pixels, uint32_t color)
 
 	i = 0;
 	y = 0;
-	while (y < 6)
+	while (y < 12)
 	{
 		x = 0;
-		while (x < 6)
+		while (x < 12)
 		{
 			pixels[i].rgba = color;
 			i++;
@@ -95,7 +95,7 @@ void	draw_player(t_game *game)
 		}
 		y++;
 	}
+	calculate_delta(game);
 	mlx_pixel_put_region(game->mlx, game->window, game->player.pos_x * 6 - 1,
 		game->player.pos_y * 6 - 1, 3, 3, green);
-	calculate_delta(game);
 }
