@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 16:20:14 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 18:31:50 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ int	no(t_game **game, char *info)
 
 	j = 0;
 	count = 0;
+	if ((*game)->no)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Invalid data.", 2);
+		return (1);
+	}
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -74,6 +80,12 @@ int	so(t_game **game, char *info)
 
 	j = 0;
 	count = 0;
+	if ((*game)->so)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Invalid data.", 2);
+		return (1);
+	}
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -99,6 +111,12 @@ int	we(t_game **game, char *info)
 
 	j = 0;
 	count = 0;
+	if ((*game)->we)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Invalid data.", 2);
+		return (1);
+	}
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -124,6 +142,12 @@ int	ea(t_game **game, char *info)
 
 	j = 0;
 	count = 0;
+	if ((*game)->ea)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Invalid data.", 2);
+		return (1);
+	}
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);

@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/30 13:11:23 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 18:20:47 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 	str = get_next_line(fd);
 	while (line_is_good(str))
 	{
+		if (!str)
+		{
+			ft_putendl_fd("Error", 2);
+			ft_putendl_fd("There is no map", 2);
+			return (NULL);
+		}
 		free(str);
 		str = get_next_line(fd);
 	}

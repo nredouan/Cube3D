@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 17:40:36 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/31 17:56:07 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	game_destroy(t_game *game)
 		mlx_destroy_context(game->mlx);
 	if (game->win_infos)
 		free(game->win_infos);
+	close(game->fd);
 	free_memory(game->map);
 	free(game);
 }

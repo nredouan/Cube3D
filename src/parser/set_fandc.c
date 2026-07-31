@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 14:57:32 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 18:34:30 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,29 @@ char	**good_rgb(char *info)
 		}
 		i++;
 	}
-	if (i > 3)
+	if (i != 3)
 	{
 		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Too much arg in floor.", 2);
+		ft_putendl_fd("RGB format is not valid.", 2);
 		free_memory(rgb);
 		return (NULL);
 	}
 	return (rgb);
 }
 
-int	arg_exist(char *info)
+int	arg_exist(char *info, int f)
 {
 	int	i;
 	int	comma;
 
 	i = 0;
 	comma = 0;
+	if (f != -1)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Invalid data.", 2);
+		return (1);
+	}
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
@@ -83,7 +89,7 @@ int	f(t_game **game, char *info)
 	int		i;
 	int		nb;
 
-	if (arg_exist(info))
+	if (arg_exist(info, (*game)->f[0]))
 		return (1);
 	rgb = good_rgb(info);
 	if (!rgb)
@@ -112,7 +118,7 @@ int	c(t_game **game, char *info)
 	int		i;
 	int		nb;
 
-	if (arg_exist(info))
+	if (arg_exist(info, (*game)->c[0]))
 		return (1);
 	rgb = good_rgb(info);
 	if (!rgb)

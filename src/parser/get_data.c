@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:44:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/23 15:32:32 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/31 18:23:18 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	get_textures(char *str, int fd, t_game **game)
 	{"EA", ea}, {"F", f}, {"C", c}, {NULL, NULL}};
 
 	nb = 0;
-	while (nb != 6)
+	while (str && nb != 6)
 	{
 		while (identifier_good(str))
 		{
@@ -78,11 +78,21 @@ int	get_textures(char *str, int fd, t_game **game)
 		}
 		if (send_info(list, fd, str, game))
 			return (1);
-		free(str);
-		str = get_next_line(fd);
+		
 		nb++;
+		if (nb != 6)
+		{
+			free(str);
+			str = get_next_line(fd);
+		}
 	}
 	free(str);
+	if (nb != 6)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Missing information in file.", 2);
+		return (1);
+	}
 	return (0);
 }
 

@@ -69,6 +69,7 @@ typedef struct s_game
 	mlx_image				so;
 	mlx_image				we;
 	mlx_image				ea;
+	int						fd;
 	int						image_width;
 	int						texture_width[4];
 	int						image_height;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:43:54 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 15:49:11 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/07/31 18:32:52 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ static t_game	*init_struct_game(int fd)
 
 	game = ft_calloc(sizeof(t_game), 1);
 	if (!game)
+	{
+		close(fd);
 		return (NULL);
+	}
+	game->fd = fd;
+	game->f[0] = -1;
+	game->c[0] = -1;
 	game->win_infos = ft_calloc(sizeof(mlx_window_create_info), 1);
 	if (!game->win_infos)
 	{
