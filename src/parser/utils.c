@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:45:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 14:58:54 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 18:42:10 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	is_cub(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i] && str[i] != '.')
-		i++;
-	if (strncmp(&str[i], ".cub", 4))
+	i = ft_strlen(str);
+	while (i > 0 && str[i] != '.')
+		i--;
+	if (strcmp(&str[i], ".cub"))
 	{
 		ft_putendl_fd("Error", 2);
 		ft_putendl_fd("Your map file need to be a .cub extension", 2);

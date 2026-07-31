@@ -6,11 +6,30 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 18:31:50 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 18:48:26 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+int	is_jpg(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	while (i > 0 && str[i] != '.')
+		i--;
+	if (strcmp(&str[i], ".jpg"))
+	{
+		if (strcmp(&str[i], ".jpeg"))
+		{
+			ft_putendl_fd("Error", 2);
+			ft_putendl_fd("The texture need to be a jpg/jpeg extension", 2);
+			return (1);
+		}
+	}
+	return (0);
+}
 
 char	*get_good_info(char *info)
 {
@@ -31,6 +50,8 @@ char	*get_good_info(char *info)
 		cpy[count] = info[j + count];
 		count++;
 	}
+	if (is_jpg(cpy))
+		return (NULL);
 	fd = open(cpy, O_RDONLY);
 	if (fd == -1)
 	{

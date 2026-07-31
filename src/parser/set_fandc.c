@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 18:34:30 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 18:38:20 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**good_rgb(char *info)
 		j = 0;
 		while (rgb[i][j])
 		{
-			if (rgb[i][j] != '\n' && !ft_isdigit(rgb[i][j]))
+			if (rgb[i][j] != '\n' && rgb[i][j] != ' ' && !ft_isdigit(rgb[i][j]))
 				return (not_digit(rgb));
 			j++;
 		}
