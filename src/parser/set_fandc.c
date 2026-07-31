@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/30 13:22:05 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 14:57:32 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,27 @@ char	**good_rgb(char *info)
 
 int	arg_exist(char *info)
 {
+	int	i;
+	int	comma;
+
+	i = 0;
+	comma = 0;
 	if (!info)
 	{
 		ft_putendl_fd("Error", 2);
 		ft_putendl_fd("Missing information.", 2);
+		return (1);
+	}
+	while (info[i])
+	{
+		if (info[i] == ',')
+			comma++;
+		i++;
+	}
+	if (comma > 2)
+	{
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("RGB format is not valid.", 2);
 		return (1);
 	}
 	return (0);
