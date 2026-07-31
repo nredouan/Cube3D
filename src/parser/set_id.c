@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/03 12:39:37 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/30 14:51:04 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 16:20:14 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	no(t_game **game, char *info)
 	if (!cpy)
 		return (1);
 	(*game)->no = mlx_new_image_from_file((*game)->mlx, cpy,
-			&(*game)->image_width, &(*game)->image_height);
+			&(*game)->texture_width[0], &(*game)->texture_height[0]);
 	free(cpy);
 	if (!(*game)->no)
 		return (1);
@@ -84,7 +84,7 @@ int	so(t_game **game, char *info)
 	if (!cpy)
 		return (1);
 	(*game)->so = mlx_new_image_from_file((*game)->mlx, cpy,
-			&(*game)->image_width, &(*game)->image_height);
+			&(*game)->texture_width[1], &(*game)->texture_height[1]);
 	free(cpy);
 	if (!(*game)->so)
 		return (1);
@@ -109,7 +109,7 @@ int	we(t_game **game, char *info)
 	if (!cpy)
 		return (1);
 	(*game)->we = mlx_new_image_from_file((*game)->mlx, cpy,
-			&(*game)->image_width, &(*game)->image_height);
+			&(*game)->texture_width[2], &(*game)->texture_height[2]);
 	free(cpy);
 	if (!(*game)->we)
 		return (1);
@@ -134,7 +134,7 @@ int	ea(t_game **game, char *info)
 	if (!cpy)
 		return (1);
 	(*game)->ea = mlx_new_image_from_file((*game)->mlx, cpy,
-			&(*game)->image_width, &(*game)->image_height);
+			&(*game)->texture_width[3], &(*game)->texture_height[3]);
 	free(cpy);
 	if (!(*game)->ea)
 		return (1);

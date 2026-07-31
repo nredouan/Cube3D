@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:45:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/30 12:37:53 by scegla           ###   ########.fr       */
+/*   Updated: 2026/07/31 14:58:54 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	invalid_info(void)
 {
 	ft_putendl_fd("Error", 2);
-	ft_putendl_fd("Invalid information.", 2);
+	ft_putendl_fd("RGB format is not valid.", 2);
 }
 
 void	free_memory(char **s)
