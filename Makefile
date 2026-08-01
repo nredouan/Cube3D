@@ -14,7 +14,6 @@ SRCS 		=	main.c \
 				parser.c \
 				set_fandc.c \
 				get_data.c \
-				parser_utils.c \
 				utils.c \
 				draw.c \
 				draw_map.c \
@@ -25,6 +24,7 @@ SRCS 		=	main.c \
 				init.c \
 				map_utils.c \
 				id_utils.c \
+				flood_fill.c
 
 OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 

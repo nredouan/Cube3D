@@ -6,33 +6,11 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:14:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 13:05:23 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/08/01 17:09:15 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-static void	map_error(t_game **game)
-{
-	int	resu;
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	resu = 0;
-	while ((*game)->map[y])
-	{
-		if ((*game)->map[y][x] == '0')
-			is_map_is_error(game, x, y);
-		x++;
-		if ((*game)->map[y][x] == '\n' || (*game)->map[y][x] == 0)
-		{
-			y++;
-			x = 0;
-		}
-	}
-}
 
 int	is_there_a_unvalid_character(char **map, int y, int x)
 {
@@ -113,6 +91,6 @@ int	parser(t_game **game)
 	(*game)->px = x;
 	(*game)->py = y;
 	(*game)->angle = (*game)->map[y][x];
-	map_error(game);
+	call_flood_fill(*game);
 	return (1);
 }

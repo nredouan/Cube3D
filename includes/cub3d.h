@@ -110,11 +110,10 @@ int		f(t_game **game, char *info);
 int		c(t_game **game, char *info);
 
 // parser
-void	is_map_is_error(t_game **game, int x, int y);
 void	image_does_not_exist(char *cpy);
-void	map_is_error(t_game **game);
 int		parser(t_game **game);
 char	**get_map(int fd);
+void	call_flood_fill(t_game *game);
 
 // map_utils
 int		str_is_white_space(char *c);
