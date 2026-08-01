@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 20:14:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/29 14:29:09 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:25:01 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ static int	check_map_objects(char **map, int y, int x)
 	}
 	if (count_player != 1)
 	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("There is not the right amount of start position", 2);
+		error_handler("There is not the right amount of start position");
 		return (0);
 	}
 	return (1);
@@ -84,8 +83,7 @@ int	map_has_what_we_need(char	**map, int y, int x)
 {
 	if (!is_there_a_unvalid_character(map, y, x))
 	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("A character in the map is not valid.", 2);
+		error_handler("A character in the map is not valid.");
 		return (0);
 	}
 	if (!check_map_objects(map, y, x))

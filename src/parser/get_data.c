@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:44:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 18:23:18 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:39:54 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@ int	identifier_good(char *str)
 		if (str[i] != ' ' && str[i] != '\n')
 			return (0);
 		i++;
-	}
-	return (1);
-}
-
-int	error_in_info(char *str, int fd, int i)
-{
-	free(str);
-	finish_gnl(fd);
-	if (i)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Wrong identifier in map.", 2);
 	}
 	return (1);
 }
@@ -62,6 +50,12 @@ int	send_info(const t_set_id *list, int fd, char *str, t_game **game)
 	return (0);
 }
 
+int	information_incomplete(void)
+{
+	error_handler("Missing information in file.");
+	return (1);
+}
+
 int	get_textures(char *str, int fd, t_game **game)
 {
 	int				nb;
@@ -78,7 +72,6 @@ int	get_textures(char *str, int fd, t_game **game)
 		}
 		if (send_info(list, fd, str, game))
 			return (1);
-		
 		nb++;
 		if (nb != 6)
 		{
@@ -88,11 +81,7 @@ int	get_textures(char *str, int fd, t_game **game)
 	}
 	free(str);
 	if (nb != 6)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Missing information in file.", 2);
-		return (1);
-	}
+		return (information_incomplete());
 	return (0);
 }
 
@@ -105,8 +94,7 @@ int	map_valid(t_game **game, int fd)
 	str = get_next_line(fd);
 	if (!str)
 	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("The file is empty.", 2);
+		error_handler("The file is empty.");
 		return (1);
 	}
 	if (get_textures(str, fd, game))

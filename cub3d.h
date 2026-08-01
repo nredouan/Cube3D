@@ -143,7 +143,9 @@ void	free_memory(char **s);
 void	finish_gnl(int fd);
 void	is_cub(char *str);
 void	game_destroy(t_game *game);
-
+int		is_jpg(char *str);
+char	*cpy_start_to_endl(char *info, int j);
+void	*not_digit(char **rgb);
 //fill data
 int		get_textures(char *str, int fd, t_game **game);
 int		error_in_info(char *str, int fd, int i);
@@ -151,7 +153,7 @@ int		send_info(const t_set_id *list,
 			int fd, char *str, t_game **game);
 int		map_valid(t_game **game, int fd);
 int		identifier_good(char *str);
-void	invalid_info(void);
+void	error_handler(char *str);
 
 //init game
 t_game	*init_game(int fd);

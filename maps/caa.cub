@@ -1,11 +1,11 @@
 NO    textures/wallN.jpeg
 SO    textures/wallS.jpeg
-WE    textures/wallW.jpeg
 EA    textures/wallE.jpeg
+WE    textures/wallW.jpeg
 
-F 41,       134,204
+F 41,134,255
 C 0,255,0
 
-1111
-1E01
-1111
+111111
+1E0001
+111111

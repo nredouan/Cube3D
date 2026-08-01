@@ -6,16 +6,16 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:45:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 18:42:10 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:21:48 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	invalid_info(void)
+void	error_handler(char *str)
 {
 	ft_putendl_fd("Error", 2);
-	ft_putendl_fd("RGB format is not valid.", 2);
+	ft_putendl_fd(str, 2);
 }
 
 void	free_memory(char **s)
@@ -73,8 +73,7 @@ void	is_cub(char *str)
 		i--;
 	if (strcmp(&str[i], ".cub"))
 	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Your map file need to be a .cub extension", 2);
+		error_handler("Your map file need to be a .cub extension");
 		exit (1);
 	}
 }

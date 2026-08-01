@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:47:30 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/30 12:02:55 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:25:13 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	map_is_error(t_game **game)
 {
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd("The map is not enclosed.", 2);
+	error_handler("The map is not enclosed.");
 	game_destroy(*game);
 	exit(1);
 }

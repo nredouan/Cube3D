@@ -6,19 +6,11 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 18:38:20 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:39:25 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-void	*not_digit(char **rgb)
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd("Rgb need to be only number.", 2);
-	free_memory(rgb);
-	return (NULL);
-}
 
 char	**good_rgb(char *info)
 {
@@ -41,12 +33,17 @@ char	**good_rgb(char *info)
 	}
 	if (i != 3)
 	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("RGB format is not valid.", 2);
+		error_handler("RGB format is not valid.");
 		free_memory(rgb);
 		return (NULL);
 	}
 	return (rgb);
+}
+
+int	arg_not_valid(char *str)
+{
+	error_handler(str);
+	return (1);
 }
 
 int	arg_exist(char *info, int f)
@@ -57,17 +54,9 @@ int	arg_exist(char *info, int f)
 	i = 0;
 	comma = 0;
 	if (f != -1)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Invalid data.", 2);
-		return (1);
-	}
+		return (arg_not_valid("Invalid data."));
 	if (!info)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("Missing information.", 2);
-		return (1);
-	}
+		return (arg_not_valid("Missing information."));
 	while (info[i])
 	{
 		if (info[i] == ',')
@@ -75,11 +64,7 @@ int	arg_exist(char *info, int f)
 		i++;
 	}
 	if (comma > 2)
-	{
-		ft_putendl_fd("Error", 2);
-		ft_putendl_fd("RGB format is not valid.", 2);
-		return (1);
-	}
+		return (arg_not_valid("RGB format is not valid."));
 	return (0);
 }
 
@@ -102,7 +87,7 @@ int	f(t_game **game, char *info)
 			(*game)->f[i] = nb;
 		else
 		{
-			invalid_info();
+			error_handler("RGB format is not valid.");
 			free_memory(rgb);
 			return (1);
 		}
@@ -131,7 +116,7 @@ int	c(t_game **game, char *info)
 			(*game)->c[i] = nb;
 		else
 		{
-			invalid_info();
+			error_handler("RGB format is not valid.");
 			free_memory(rgb);
 			return (1);
 		}

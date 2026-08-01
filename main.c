@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 17:56:07 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:29:00 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,23 @@ void	update(void *param)
 		move_view(game);
 }
 
-static void	error_handler(char *message)
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(message, 2);
-	exit(1);
-}
-
 int	main(int ac, char **av)
 {
 	t_game	*game;
 	int		fd;
 
 	if (ac != 2)
+	{
 		error_handler("Wrong number of arguments.");
+		return (1);
+	}
 	is_cub(av[1]);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || fd > 1023)
+	{
 		error_handler("Your file is not accessible.");
+		return (1);
+	}
 	game = init_game(fd);
 	if (!game)
 		return (1);

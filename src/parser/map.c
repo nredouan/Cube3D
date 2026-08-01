@@ -6,7 +6,7 @@
 /*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/07/31 18:20:47 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 11:30:29 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int	finish_gnl_of_the_map(int fd)
 	{
 		if (r == 0 && str_is_white_space(str))
 		{
-			ft_putendl_fd("Error", 2);
-			ft_putendl_fd("The map need to be the last thing in the file", 2);
+			error_handler("The map need to be the last thing in the file");
 			r++;
 		}
 		free(str);
@@ -88,8 +87,7 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 	{
 		if (!str)
 		{
-			ft_putendl_fd("Error", 2);
-			ft_putendl_fd("There is no map", 2);
+			error_handler("There is no map");
 			return (NULL);
 		}
 		free(str);
@@ -101,10 +99,7 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 		resu = finish_gnl_of_the_map(fd);
 		free(str);
 		if (resu)
-		{
 			free_tmap(&maps);
-			return (NULL);
-		}
 	}
 	return (maps);
 }
