@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 13:05:23 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/08/01 16:15:43 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_map	*make_map(int fd, t_map *new, t_map *maps)
 	int		resu;
 
 	str = get_next_line(fd);
-	while (line_is_good(str))
+	while (!str_is_white_space(str))
 	{
 		if (!str)
 		{

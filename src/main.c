@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/08/01 13:01:42 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/08/01 16:38:02 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,19 @@ void	update(void *param)
 		move_view(game);
 }
 
+int	is_directory(char *str, int fd2)
+{
+	int	fd;
+
+	fd = open(str, __O_DIRECTORY);
+	if (fd == -1)
+		return (0);
+	if (fd2 != -1)
+		close (fd2);
+	close (fd);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
@@ -85,7 +98,7 @@ int	main(int ac, char **av)
 	}
 	is_cub(av[1]);
 	fd = open(av[1], O_RDONLY);
-	if (fd < 0 || fd > 1023)
+	if (fd < 0 || is_directory(av[1], fd))
 	{
 		error_handler("Your file is not accessible.");
 		return (1);
