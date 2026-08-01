@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 16:44:26 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 13:05:11 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/08/01 16:41:25 by scegla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	send_info(const t_set_id *list, int fd, char *str, t_game **game)
 		j++;
 	while (list[i].type)
 	{
-		if (!ft_strncmp(&str[j], list[i].type, ft_strlen(list[i].type)))
+		if (!ft_strncmp(&str[j], list[i].type,
+				ft_strlen(list[i].type)) && str[ft_strlen(list[i].type)] == ' ')
 		{
 			if (list[i].f(game, &str[until_space(str)]))
 				return (error_in_info(str, fd, 0));
