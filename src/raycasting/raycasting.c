@@ -6,7 +6,7 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:53:59 by nredouan          #+#    #+#             */
-/*   Updated: 2026/08/01 13:05:45 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/08/01 17:23:39 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,3 @@ void	calc_rays(t_game *game)
 		ray.x++;
 	}
 }
-
-//TODO : faire en sorte de pas pouvoir traverser les cases dans les diagonales 
