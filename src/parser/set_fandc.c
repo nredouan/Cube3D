@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_fandc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 16:57:00 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 11:39:25 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 13:05:23 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../includes/cub3d.h"
 
 char	**good_rgb(char *info)
 {

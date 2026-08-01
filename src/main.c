@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:01:44 by nredouan          #+#    #+#             */
-/*   Updated: 2026/08/01 11:29:00 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 13:01:42 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ void	move_view(t_game *game)
 	{
 		game->player.angle -= 0.2;
 		if (game->player.angle <= 0)
-			game->player.angle += 2 * PI;
+			game->player.angle += 2 * 3.1415926535;
 		game->player.dir_x = cosf(game->player.angle);
 		game->player.dir_y = sinf(game->player.angle);
 	}
 	if (x > WIDTH - WIDTH / 4)
 	{
 		game->player.angle += 0.2;
-		if (game->player.angle > 2 * PI)
-			game->player.angle -= 2 * PI;
+		if (game->player.angle > 2 * 3.1415926535)
+			game->player.angle -= 2 * 3.1415926535;
 		game->player.dir_x = cosf(game->player.angle);
 		game->player.dir_y = sinf(game->player.angle);
 	}

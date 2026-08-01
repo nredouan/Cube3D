@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 17:16:21 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 16:28:02 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 13:05:02 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	move_f_b(int key, t_game *game, int pos_x, int pos_y)
 {
@@ -72,15 +72,15 @@ static void	turn(int key, t_game *game)
 	{
 		game->player.angle -= 0.2;
 		if (game->player.angle <= 0)
-			game->player.angle += 2 * PI;
+			game->player.angle += 2 * 3.1415926535;
 		game->player.dir_x = cosf(game->player.angle);
 		game->player.dir_y = sinf(game->player.angle);
 	}
 	if (key == SDL_SCANCODE_RIGHT)
 	{
 		game->player.angle += 0.2;
-		if (game->player.angle > 2 * PI)
-			game->player.angle -= 2 * PI;
+		if (game->player.angle > 2 * 3.1415926535)
+			game->player.angle -= 2 * 3.1415926535;
 		game->player.dir_x = cosf(game->player.angle);
 		game->player.dir_y = sinf(game->player.angle);
 	}

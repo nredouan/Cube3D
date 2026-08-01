@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:15:33 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 16:26:02 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 13:04:47 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	draw_ceiling(t_game *game, int draw_start, double x)
 {

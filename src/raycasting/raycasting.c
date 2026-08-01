@@ -6,11 +6,11 @@
 /*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 15:53:59 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/29 15:05:51 by nredouan         ###   ########.fr       */
+/*   Updated: 2026/08/01 13:05:45 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	calculate_hit(t_game *game, t_ray *ray)
 {

@@ -25,10 +25,8 @@
 
 # define RED "\033[0;31m"
 # define END "\033[0m"
-# define PI 3.1415926535
 # define WIDTH 1920
 # define HEIGHT 1080
-# define WALL_COLOR 0x00FF00FF
 
 typedef struct s_player
 {
@@ -91,13 +89,6 @@ typedef struct s_game
 	bool					is_mouse;
 }							t_game;
 
-typedef struct s_mlx
-{
-	void	*addr;
-	void	*win;
-	void	*wall_no;
-}				t_mlx;
-
 typedef struct s_map
 {
 	char			*map;
@@ -110,7 +101,6 @@ typedef struct s_set_id
 	int		(*f)(t_game **game, char *info);
 }	t_set_id;
 
-//Simon parser
 // set_id
 int		no(t_game **game, char *info);
 int		so(t_game **game, char *info);
@@ -146,6 +136,7 @@ void	game_destroy(t_game *game);
 int		is_jpg(char *str);
 char	*cpy_start_to_endl(char *info, int j);
 void	*not_digit(char **rgb);
+
 //fill data
 int		get_textures(char *str, int fd, t_game **game);
 int		error_in_info(char *str, int fd, int i);

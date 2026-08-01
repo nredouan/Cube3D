@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 14:43:54 by nredouan          #+#    #+#             */
-/*   Updated: 2026/07/31 18:32:52 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 13:05:07 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 static t_game	*init_struct_game(int fd)
 {
@@ -59,13 +59,13 @@ static void	init_player(t_game *game)
 	game->player.pos_x = game->px + 0.5;
 	game->player.pos_y = game->py + 0.5;
 	if (game->angle == 'S')
-		game->player.angle = PI / 2;
+		game->player.angle = 3.1415926535 / 2;
 	else if (game->angle == 'N')
-		game->player.angle = PI + PI / 2;
+		game->player.angle = 3.1415926535 + 3.1415926535 / 2;
 	else if (game->angle == 'W')
-		game->player.angle = PI;
+		game->player.angle = 3.1415926535;
 	else
-		game->player.angle = 2 * PI;
+		game->player.angle = 2 * 3.1415926535;
 	game->player.dir_x = cosf(game->player.angle);
 	game->player.dir_y = sinf(game->player.angle);
 	game->player.plane_x = 0;

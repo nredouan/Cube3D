@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   id_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 14:50:49 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 11:40:15 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 13:05:13 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../includes/cub3d.h"
 
 void	image_does_not_exist(char *cpy)
 {
