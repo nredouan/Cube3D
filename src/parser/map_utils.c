@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 12:40:20 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 16:14:09 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/01 17:28:35 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	line_is_good(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (1);
-	while (str[i])
-	{
-		if (str[i] == '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	str_is_white_space(char *c)
 {

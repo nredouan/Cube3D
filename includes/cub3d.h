@@ -117,7 +117,6 @@ void	call_flood_fill(t_game *game);
 
 // map_utils
 int		str_is_white_space(char *c);
-int		line_is_good(char *str);
 
 // t_map
 void	ft_lstadd_back_map(t_map **lst, t_map *new);
