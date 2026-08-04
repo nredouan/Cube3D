@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scegla <scegla@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nredouan <nredouan@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/06 12:41:39 by scegla            #+#    #+#             */
-/*   Updated: 2026/08/01 16:15:43 by scegla           ###   ########.fr       */
+/*   Updated: 2026/08/04 14:25:08 by nredouan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	finish_gnl_of_the_map(int fd)
 	{
 		if (r == 0 && str_is_white_space(str))
 		{
-			error_handler("The map need to be the last thing in the file");
+			error_handler("Invalid data in file.");
 			r++;
 		}
 		free(str);
